@@ -26,6 +26,16 @@
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<Account> Accounts { get; set; }
+
+        public DbSet<Contact> Contacts { get; set; }
+
+        public DbSet<Deal> Deals { get; set; }
+
+        public DbSet<Information> Information { get; set; }
+
+        public DbSet<Product> Products { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -72,6 +82,21 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            builder
+                .Entity<DealsProductsQuantity>()
+                .HasKey(dp => new { dp.DealId, dp.ProductId });
+            builder
+                .Entity<DealsProductsQuantity>()
+                .HasOne(dp => dp.Deal)
+                .WithMany(d => d.Products)
+                .HasForeignKey(dp => dp.DealId);
+
+            builder
+               .Entity<DealsProductsQuantity>()
+               .HasOne(dp => dp.Product)
+               .WithMany(p => p.Deals)
+               .HasForeignKey(dp => dp.ProductId);
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

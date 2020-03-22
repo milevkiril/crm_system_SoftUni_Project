@@ -4,14 +4,16 @@ using CRMSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CRMSystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200322160215_databaseInitial")]
+    partial class databaseInitial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -253,9 +255,6 @@ namespace CRMSystem.Data.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -274,14 +273,9 @@ namespace CRMSystem.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AccountId");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("IsDeleted");
 
@@ -524,7 +518,7 @@ namespace CRMSystem.Data.Migrations
                         .HasForeignKey("DetailsInformationId");
 
                     b.HasOne("CRMSystem.Data.Models.ApplicationUser", "User")
-                        .WithMany("Accounts")
+                        .WithMany()
                         .HasForeignKey("UserId1");
                 });
 
@@ -548,10 +542,6 @@ namespace CRMSystem.Data.Migrations
                     b.HasOne("CRMSystem.Data.Models.Account", null)
                         .WithMany("Deals")
                         .HasForeignKey("AccountId");
-
-                    b.HasOne("CRMSystem.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("Deals")
-                        .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("CRMSystem.Data.Models.DealsProductsQuantity", b =>
