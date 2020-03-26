@@ -21,10 +21,12 @@
         [Required]
         public string Phone { get; set; }
 
+        [Required]
         public int AccountId { get; set; }
 
         public Account Account { get; set; }
 
+        [Required]
         public int DealId { get; set; }
 
         public Deal Deal { get; set; }

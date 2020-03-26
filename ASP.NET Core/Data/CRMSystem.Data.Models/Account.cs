@@ -12,6 +12,7 @@
 
         public Information Details { get; set; }
 
+        [Required]
         public int UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }

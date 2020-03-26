@@ -1,11 +1,13 @@
 ﻿namespace CRMSystem.Data.Models
 {
     using System.Collections.Generic;
-
+    using System.ComponentModel.DataAnnotations;
     using CRMSystem.Data.Common.Models;
 
     public class Product : BaseDeletableModel<int>
     {
+        [Required]
+        [Key]
         public int ProductId { get; set; }
 
         public string Name { get; set; }
