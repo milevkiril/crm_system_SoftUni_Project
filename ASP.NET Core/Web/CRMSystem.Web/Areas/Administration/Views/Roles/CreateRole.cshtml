@@ -1,0 +1,20 @@
+﻿@using CRMSystem.Web.Areas.Administration.ViewModels
+@model CreateRoleViewModel
+
+@{
+    ViewBag.Title = "Create New Role";
+}
+
+
+<h1 class="text-center suls-text-color">Create New Role</h1>
+<form class="mx-auto half-width col-5" method="post" action="/Administration/CreateRole">
+    <div class="top-border-line primary-separator"></div>
+    <div class="form-group">
+        <label asp-for="RoleName">Role Name</label>
+        <input asp-for="RoleName" class="form-control" />
+        <span asp-validation-for="RoleName" class="text-black-50"></span>
+    </div>
+    <div class="button-holder d-flex justify-content-center">
+        <button type="submit" class="btn suls-bg-color">Create Role</button>
+    </div>
+</form>
