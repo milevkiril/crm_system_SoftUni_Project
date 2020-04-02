@@ -47,4 +47,9 @@
     <ProjectReference Include="..\CRMSystem.Web.Infrastructure\CRMSystem.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\CRMSystem.Web.ViewModels\CRMSystem.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\vendor\font-awesome\less\" />
+    <Folder Include="wwwroot\vendor\font-awesome\scss\" />
+  </ItemGroup>
 </Project>
