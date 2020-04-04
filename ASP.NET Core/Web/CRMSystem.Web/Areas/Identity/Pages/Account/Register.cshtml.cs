@@ -50,6 +50,16 @@ namespace CRMSystem.Web.Areas.Identity.Pages.Account
             public string Username { get; set; }
 
             [Required]
+            public string FirstName { get; set; }
+
+            [Required]
+            public string LastName { get; set; }
+
+            public string City { get; set; }
+
+            public string Country { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }

@@ -4,6 +4,7 @@
     using CRMSystem.Data.Models;
     using CRMSystem.Services.Mapping;
     using Microsoft.AspNetCore.Identity;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Security.Cryptography;
     using System.Text;
@@ -25,6 +26,15 @@
         public int CountUsers()
         {
             throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<T> GetAll<T>()
+        {
+            IQueryable<ApplicationUser> users = this.usersRepository
+                .All()
+                .OrderByDescending(x => x.CreatedOn);
+
+            return users.To<T>().ToList();
         }
 
         public T GetById<T>(string username, string password)

@@ -1,5 +1,7 @@
 ﻿namespace CRMSystem.Web.Controllers
 {
+    using AutoMapper;
+    using CRMSystem.Data.Models;
     using CRMSystem.Services;
     using CRMSystem.Web.ViewModels;
     using CRMSystem.Web.ViewModels.Users;
@@ -12,14 +14,13 @@
     public class UsersController : Controller
     {
         private readonly IUsersService usersService;
-        private readonly ILogger logger;
 
-        public UsersController(IUsersService usersService, ILogger logger)
+        public UsersController(IUsersService usersService)
         {
             this.usersService = usersService;
-            this.logger = logger;
         }
 
+        [HttpPatch]
         public IActionResult ById(string username, string password)
         {
             var getUserViewModel = this.usersService.GetById<UserViewModel>(username, password);
@@ -29,6 +30,16 @@
             }
 
             return this.View(getUserViewModel);
+        }
+
+        public IActionResult GetAll()
+        {
+            var viewModel = new AllUsersViewModel
+            {
+                Users = this.usersService.GetAll<UserViewModel>(),
+            };
+
+            return this.View(viewModel);
         }
 
         //[HttpPost]

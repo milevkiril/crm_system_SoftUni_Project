@@ -20,9 +20,15 @@ namespace CRMSystem.Data.Models
             this.Accounts = new HashSet<Account>();
         }
 
+        public string FirstName { get; set; }
+
         public string LastName { get; set; }
 
         public string LinkedInUrl { get; set; }
+
+        public string City { get; set; }
+
+        public string Country { get; set; }
 
         // Audit info
         public DateTime CreatedOn { get; set; }

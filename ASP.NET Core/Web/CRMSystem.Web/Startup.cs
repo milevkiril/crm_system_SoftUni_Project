@@ -8,6 +8,7 @@
     using CRMSystem.Data.Models;
     using CRMSystem.Data.Repositories;
     using CRMSystem.Data.Seeding;
+    using CRMSystem.Services;
     using CRMSystem.Services.Data;
     using CRMSystem.Services.Mapping;
     using CRMSystem.Services.Messaging;
@@ -61,6 +62,7 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<IUsersService, UsersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -106,6 +108,9 @@
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute(
+                            "default",
+                            "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });
         }

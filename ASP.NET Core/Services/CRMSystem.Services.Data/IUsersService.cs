@@ -1,4 +1,6 @@
-﻿namespace CRMSystem.Services
+﻿using System.Collections.Generic;
+
+namespace CRMSystem.Services
 {
     public interface IUsersService
     {
@@ -11,5 +13,7 @@
         bool IsEmailUsed(string email);
 
         int CountUsers();
+
+        IEnumerable<T> GetAll<T>();
     }
 }
