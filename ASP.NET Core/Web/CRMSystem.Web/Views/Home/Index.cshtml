@@ -3,9 +3,10 @@
     this.ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <p>One better CRM system</p>
+    <div class="text-center">
+        <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
+        <p>One better CRM system</p>
 
-    <a asp-area="Administration" asp-controller="Roles" asp-action="CreateRole">Create role</a>
-</div>
+        <a asp-area="Administration" asp-controller="Roles" asp-action="CreateRole">Create role</a>
+        <a asp-controller="Accounts" asp-action="Create">Create account</a>
+    </div>

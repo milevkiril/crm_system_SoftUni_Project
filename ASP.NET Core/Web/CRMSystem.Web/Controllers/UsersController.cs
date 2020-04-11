@@ -20,7 +20,7 @@
             this.usersService = usersService;
         }
 
-        [HttpPatch]
+        [HttpPost]
         public IActionResult ById(string username, string password)
         {
             var getUserViewModel = this.usersService.GetById<UserViewModel>(username, password);

@@ -13,9 +13,10 @@
         public Information Details { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
+
 
         [Required]
         public AccountType TypeAccount { get; set; }

@@ -7,9 +7,11 @@
 
     public class DashboardController : RolesController
     {
+        //private static readonly RolesService rolesService;
         private readonly ISettingsService settingsService;
 
         public DashboardController(ISettingsService settingsService)
+            //: base(rolesService)
         {
             this.settingsService = settingsService;
         }

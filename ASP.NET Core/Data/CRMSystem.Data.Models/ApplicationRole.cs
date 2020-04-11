@@ -2,7 +2,7 @@
 namespace CRMSystem.Data.Models
 {
     using System;
-
+    using System.Collections.Generic;
     using CRMSystem.Data.Common.Models;
 
     using Microsoft.AspNetCore.Identity;
@@ -19,6 +19,8 @@ namespace CRMSystem.Data.Models
         {
             this.Id = Guid.NewGuid().ToString();
         }
+
+        public ICollection<ApplicationUser> Users { get; set; } = new HashSet<ApplicationUser>();
 
         public DateTime CreatedOn { get; set; }
 
