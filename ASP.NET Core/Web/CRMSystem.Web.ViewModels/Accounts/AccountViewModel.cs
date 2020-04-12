@@ -6,12 +6,14 @@
 
     public class AccountViewModel : IMapFrom<Account>
     {
-        //public DateTime CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         public string AccountName { get; set; }
 
+        public string AccountOwner { get; set; }
+
         //public Information Details { get; set; }
-       
+
         //public int UserId { get; set; }
 
         //public virtual ApplicationUser User { get; set; }

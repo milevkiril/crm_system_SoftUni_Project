@@ -16,10 +16,12 @@
 
         public Stage Stage { get; set; }
 
-        public string CreatedBy { get; set; }
+        public string DealOwner { get; set; }
+
+        public string AccountName { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
 

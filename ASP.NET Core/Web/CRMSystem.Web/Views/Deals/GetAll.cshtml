@@ -1,7 +1,7 @@
 ﻿@using CRMSystem.Common
-@model CRMSystem.Web.ViewModels.Accounts.AllAccountsViewModel
+@model CRMSystem.Web.ViewModels.Deals.AllDealsViewModel
 @{
-    this.ViewData["Title"] = $"All accounts";
+    this.ViewData["Title"] = $"All deals";
 }
 
 <div class="text-center">
@@ -12,19 +12,20 @@
 </div>
 <hr />
 <div class="row">
-    @foreach (var account in Model.Accounts)
+    @foreach (var deal in Model.Deals)
     {
         <div class="col-md-4 media">
             @*<img src="@category.ImageUrl" width="100" class="mr-3" alt="@category.Title">*@
             <div class="media-body">
                 <h5 class="mt-0">
-                    <a href="@account.AccountName">
-                        @account.AccountName
+                    <a href="@deal.Name">
+                        @deal.Name
                     </a>
-                    
+
                 </h5>
-                @account.AccountOwner
-                @account.CreatedOn
+                @deal.AccountName
+                @deal.DealOwner
+                @deal.CreatedOn
             </div>
         </div>
         <div></div>
