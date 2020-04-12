@@ -3,17 +3,30 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using CRMSystem.Data.Common.Models;
+    using CRMSystem.Data.Models.Enumerators;
 
     public class Deal : BaseDeletableModel<int>
     {
         public int DealId { get; set; }
 
+        [Required]
         public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public Stage Stage { get; set; }
+
+        public string CreatedBy { get; set; }
 
         [Required]
         public int UserId { get; set; }
 
         public virtual ApplicationUser ApplicationUser { get; set; }
+
+        [Required]
+        public int AccountId { get; set; }
+
+        public virtual Account Account { get; set; }
 
         public virtual ICollection<DealsProductsQuantity> Products { get; set; } = new HashSet<DealsProductsQuantity>();
 

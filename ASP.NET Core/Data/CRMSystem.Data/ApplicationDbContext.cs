@@ -36,7 +36,6 @@
 
         public DbSet<Product> Products { get; set; }
 
-        public DbSet<Stage> Stages { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

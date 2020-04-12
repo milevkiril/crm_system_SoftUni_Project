@@ -1,8 +1,10 @@
-﻿namespace CRMSystem.Web.ViewModels.NewFolder
+﻿namespace CRMSystem.Web.ViewModels.Accounts
 {
+    using CRMSystem.Data.Models;
+    using CRMSystem.Services.Mapping;
     using System;
 
-    public class AccountViewModel
+    public class AccountViewModel : IMapFrom<Account>
     {
         //public DateTime CreatedOn { get; set; }
 

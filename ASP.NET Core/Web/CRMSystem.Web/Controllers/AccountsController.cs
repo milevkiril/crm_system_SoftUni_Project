@@ -2,7 +2,6 @@
 using CRMSystem.Data.Models;
 using CRMSystem.Services.Data;
 using CRMSystem.Web.ViewModels.Accounts;
-using CRMSystem.Web.ViewModels.NewFolder;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -49,17 +48,18 @@ namespace CRMSystem.Web.Controllers
 
             var postId = await this.accountsService.CreateAsync(input.AccountName, input.UserId, accType);
             this.TempData["InfoMessage"] = "Account created!";
-            return this.Redirect("/Users/GetAll");
+            return this.Redirect("/Accounts/GetAll");
             //return this.RedirectToAction(nameof(this.ById), new { id = postId });
         }
-        //public IActionResult GetAll()
-        //{
-        //    var viewModel = new AllAccountsViewModel
-        //    {
-        //        //Users = this.usersService.GetAll<AccountViewModel>(),
-        //    };
+        
+        public IActionResult GetAll()
+        {
+            var viewModel = new AllAccountsViewModel
+            {
+                Accounts = this.accountsService.GetAll<AccountViewModel>(),
+            };
 
-        //    return this.View(viewModel);
-        //}
+            return this.View(viewModel);
+        }
     }
 }

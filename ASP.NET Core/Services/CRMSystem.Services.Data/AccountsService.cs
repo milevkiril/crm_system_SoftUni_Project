@@ -1,14 +1,12 @@
-﻿using CRMSystem.Data.Common.Repositories;
-using CRMSystem.Data.Models;
-using CRMSystem.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CRMSystem.Services.Data
+﻿namespace CRMSystem.Services.Data
 {
+    using CRMSystem.Data.Common.Repositories;
+    using CRMSystem.Data.Models;
+    using CRMSystem.Services.Mapping;
+    using System.Threading.Tasks;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class AccountsService : IAccountsService
     {
         private readonly IDeletableEntityRepository<Account> accountReposityory;

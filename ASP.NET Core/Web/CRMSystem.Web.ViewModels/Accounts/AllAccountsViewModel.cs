@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CRMSystem.Web.ViewModels.NewFolder
+namespace CRMSystem.Web.ViewModels.Accounts
 {
     public class AllAccountsViewModel
     {
