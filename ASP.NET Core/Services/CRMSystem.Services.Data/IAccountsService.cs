@@ -8,6 +8,8 @@
     {
         Task<int> CreateAsync(string accountName, string userId, AccountType typeAccount);
 
+        T GetById<T>(int id);
+
         IEnumerable<T> GetAll<T>();
     }
 }

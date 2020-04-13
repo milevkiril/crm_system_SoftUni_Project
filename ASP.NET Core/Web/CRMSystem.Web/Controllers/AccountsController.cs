@@ -26,6 +26,17 @@ namespace CRMSystem.Web.Controllers
             this.userManager = userManager;
         }
 
+        public IActionResult ById(int id)
+        {
+            var postViewModel = this.accountsService.GetById<AccountViewModel>(id);
+            if (postViewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(postViewModel);
+        }
+
         public IActionResult Create()
         {
             return this.View();

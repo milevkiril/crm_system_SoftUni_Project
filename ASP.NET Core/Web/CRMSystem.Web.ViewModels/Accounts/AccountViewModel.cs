@@ -6,11 +6,15 @@
 
     public class AccountViewModel : IMapFrom<Account>
     {
+        public int Id { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public string AccountName { get; set; }
 
         public string AccountOwner { get; set; }
+
+        public string Url => $"/f/{this.AccountName.Replace(' ', '-')}";
 
         //public Information Details { get; set; }
 
