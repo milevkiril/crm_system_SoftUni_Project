@@ -25,7 +25,7 @@
             this.accountRepository = accountRepository;
         }
 
-        public async Task<int> CreateAsync(string dealName, string userId, string description, Stage stage, int accountId)
+        public async Task<int> CreateAsync(string dealName, string userId, string description, Stage stage, int accountId, string accountName)
         {
             var user = await this.userManager.FindByIdAsync(userId);
             var userName = user.UserName;
@@ -34,7 +34,8 @@
                 .All()
                 .Where(x => x.Id == accountId)
                 .FirstOrDefault();
-            var accountName = account.AccountName;
+            accountName = account.AccountName;
+            accountId = account.Id;
 
             var deal = new Deal
             {
@@ -51,15 +52,10 @@
         }
 
 
-        public IEnumerable<T> GetByAccountId<T>(int accountId, int? take = null, int skip = 0)
+        public IEnumerable<T> GetAll<T>()
         {
             var query = this.dealRepository.All()
-                .OrderByDescending(x => x.CreatedOn)
-                .Where(x => x.AccountId == accountId).Skip(skip);
-            if (take.HasValue)
-            {
-                query = query.Take(take.Value);
-            }
+                .OrderByDescending(x => x.CreatedOn);
 
             return query.To<T>().ToList();
         }

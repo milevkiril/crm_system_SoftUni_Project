@@ -7,8 +7,6 @@
 
     public class Deal : BaseDeletableModel<int>
     {
-        public int DealId { get; set; }
-
         [Required]
         public string Name { get; set; }
 

@@ -18,5 +18,7 @@ namespace CRMSystem.Web.ViewModels.Deals
         public string AccountName { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public string Url => $"/Deals/GetAll";
     }
 }

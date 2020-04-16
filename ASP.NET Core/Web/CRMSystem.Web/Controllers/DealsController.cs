@@ -43,7 +43,7 @@
 
             Stage stage = (Stage)Enum.ToObject(typeof(AccountType), input.Stage);
 
-            var postId = await this.dealsService.CreateAsync(input.Name, input.UserId, input.Description, stage, input.AccountId);
+            var dealId = await this.dealsService.CreateAsync(input.Name, input.UserId, input.Description, stage, input.AccountId, input.AccountName);
             this.TempData["InfoMessage"] = "Deal created!";
             return this.Redirect("/Deals/GetAll");
         }
@@ -59,11 +59,11 @@
             return this.View(dealViewModel);
         }
 
-        public IActionResult GetAll(int id)
+        public IActionResult GetAll()
         {
             var viewModel = new AllDealsViewModel
             {
-                Deals = this.dealsService.GetByAccountId<DealViewModel>(id),
+                Deals = this.dealsService.GetAll<DealViewModel>(),
             };
             if(viewModel == null)
             {
