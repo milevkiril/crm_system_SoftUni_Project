@@ -54,6 +54,7 @@
                 .To<T>().FirstOrDefault();
             return account;
         }
+<<<<<<< HEAD
 
         public T GetByName<T>(string name)
         {
@@ -62,5 +63,7 @@
                 .To<T>().FirstOrDefault();
             return account;
         }
+=======
+>>>>>>> 5c1d09cda30939a408f8dac636b462151659c0ea
     }
 }

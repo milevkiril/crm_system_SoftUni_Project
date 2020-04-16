@@ -15,7 +15,11 @@
 
         public string AccountOwner { get; set; }
 
+<<<<<<< HEAD
         public string Url => $"/Accounts/{this.Id}";
+=======
+        public string Url => $"/f/{this.AccountName.Replace(' ', '-')}";
+>>>>>>> 5c1d09cda30939a408f8dac636b462151659c0ea
 
         //public Information Details { get; set; }
 

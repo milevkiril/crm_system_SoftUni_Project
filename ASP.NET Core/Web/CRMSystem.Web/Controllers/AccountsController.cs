@@ -26,7 +26,10 @@ namespace CRMSystem.Web.Controllers
             this.userManager = userManager;
         }
 
+<<<<<<< HEAD
         
+=======
+>>>>>>> 5c1d09cda30939a408f8dac636b462151659c0ea
         public IActionResult ById(int id)
         {
             var postViewModel = this.accountsService.GetById<AccountViewModel>(id);
@@ -38,6 +41,7 @@ namespace CRMSystem.Web.Controllers
             return this.View(postViewModel);
         }
 
+<<<<<<< HEAD
         public IActionResult ByName(string name, int page = 1)
         {
             var viewModel =
@@ -61,6 +65,8 @@ namespace CRMSystem.Web.Controllers
             return this.View(viewModel);
         }
 
+=======
+>>>>>>> 5c1d09cda30939a408f8dac636b462151659c0ea
         public IActionResult Create()
         {
             return this.View();
