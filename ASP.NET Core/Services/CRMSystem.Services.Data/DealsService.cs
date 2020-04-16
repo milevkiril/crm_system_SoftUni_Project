@@ -51,13 +51,24 @@
         }
 
 
-        public IEnumerable<T> GetAll<T>()
+        public IEnumerable<T> GetByAccountId<T>(int accountId, int? take = null, int skip = 0)
         {
-            IQueryable<Deal> deals = this.dealRepository
-                .All()
-                .OrderByDescending(x => x.CreatedOn);
+            var query = this.dealRepository.All()
+                .OrderByDescending(x => x.CreatedOn)
+                .Where(x => x.AccountId == accountId).Skip(skip);
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
 
-            return deals.To<T>().ToList();
+            return query.To<T>().ToList();
+        }
+
+        public T GetById<T>(int id)
+        {
+            var deal = this.dealRepository.All().Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+            return deal;
         }
     }
 }

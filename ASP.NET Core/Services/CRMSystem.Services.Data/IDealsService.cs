@@ -8,6 +8,8 @@
     {
         Task<int> CreateAsync(string dealName, string userId, string description, Stage stage, int accountId);
 
-        IEnumerable<T> GetAll<T>();
+        IEnumerable<T> GetByAccountId<T>(int accountId, int? take = null, int skip = 0);
+
+        T GetById<T>(int id);
     }
 }

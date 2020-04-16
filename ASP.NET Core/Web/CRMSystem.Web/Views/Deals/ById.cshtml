@@ -1,7 +1,7 @@
 ﻿@using CRMSystem.Common
 @model CRMSystem.Web.ViewModels.Deals.AllDealsViewModel
 @{
-    this.ViewData["Title"] = $"All deals";
+    this.ViewData["Title"] = $"All accounts";
 }
 
 <div class="text-center">
@@ -9,6 +9,8 @@
     @*<cache expires-after="TimeSpan.FromDays(10)" vary-by-query="id">
             <h1 class="display-3">@DateTime.UtcNow</h1>
         </cache>*@
+
+    <a asp-controller="Deals" asp-action="Create">Create deal</a>
 </div>
 <hr />
 <div class="row">
@@ -17,13 +19,13 @@
         <div class="col-md-4 media">
             @*<img src="@category.ImageUrl" width="100" class="mr-3" alt="@category.Title">*@
             <div class="media-body">
-                <h5 class="mt-0">
-                    <a href="@deal.Name">
-                        @deal.Name
+                @*<h5 class="mt-0">
+                    <a href="@deal.Url">
+
+                        <input type='button' value=@account.AccountName id='myButton' onClick='redirectOnClick()' />
                     </a>
 
-                </h5>
-                @deal.AccountName
+                </h5>*@
                 @deal.DealOwner
                 @deal.CreatedOn
             </div>
@@ -31,3 +33,10 @@
         <div></div>
     }
 </div>
+
+
+@*<script>
+function redirectOnClick(){
+    document.location ='DealsController/GetAll';
+}
+</script>*@

@@ -26,6 +26,41 @@ namespace CRMSystem.Web.Controllers
             this.userManager = userManager;
         }
 
+        
+        public IActionResult ById(int id)
+        {
+            var postViewModel = this.accountsService.GetById<AccountViewModel>(id);
+            if (postViewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(postViewModel);
+        }
+
+        public IActionResult ByName(string name, int page = 1)
+        {
+            var viewModel =
+                this.accountsService.GetByName<AccountViewModel>(name);
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            //viewModel.ForumPosts = this.postsService.GetByCategoryId<PostInCategoryViewModel>(viewModel.Id, ItemsPerPage, (page - 1) * ItemsPerPage);
+
+            //var count = this.postsService.GetCountByCategoryId(viewModel.Id);
+            //viewModel.PagesCount = (int)Math.Ceiling((double)count / ItemsPerPage);
+            //if (viewModel.PagesCount == 0)
+            //{
+            //    viewModel.PagesCount = 1;
+            //}
+
+            //viewModel.CurrentPage = page;
+
+            return this.View(viewModel);
+        }
+
         public IActionResult Create()
         {
             return this.View();

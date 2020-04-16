@@ -109,6 +109,7 @@
                 endpoints =>
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                        endpoints.MapControllerRoute("infoAccount", "Accounts/{id:int}", new {controller = "Accounts", action = "ById" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute(
                             "default",

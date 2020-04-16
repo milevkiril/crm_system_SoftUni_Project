@@ -48,12 +48,27 @@
             return this.Redirect("/Deals/GetAll");
         }
 
-        public IActionResult GetAll()
+        public IActionResult ById(int id)
+        {
+            var dealViewModel = this.dealsService.GetById<DealViewModel>(id);
+            if (dealViewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(dealViewModel);
+        }
+
+        public IActionResult GetAll(int id)
         {
             var viewModel = new AllDealsViewModel
             {
-                Deals = this.dealsService.GetAll<DealViewModel>(),
+                Deals = this.dealsService.GetByAccountId<DealViewModel>(id),
             };
+            if(viewModel == null)
+            {
+                return this.NotFound();
+            }
 
             return this.View(viewModel);
         }

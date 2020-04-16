@@ -47,5 +47,20 @@
 
             return accounts.To<T>().ToList();
         }
+
+        public T GetById<T>(int id)
+        {
+            var account = this.accountReposityory.All().Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+            return account;
+        }
+
+        public T GetByName<T>(string name)
+        {
+            var account = this.accountReposityory.All()
+                .Where(x => x.AccountName.Replace(" ", "-") == name.Replace(" ", "-"))
+                .To<T>().FirstOrDefault();
+            return account;
+        }
     }
 }
