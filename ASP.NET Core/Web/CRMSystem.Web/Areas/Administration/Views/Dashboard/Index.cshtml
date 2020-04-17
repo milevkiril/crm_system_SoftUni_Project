@@ -4,4 +4,17 @@
 }
 
 <h1>@this.ViewData["Title"]</h1>
-Settings: @this.Model.SettingsCount
+@*Settings: @this.Model.SettingsCount*@
+
+
+<ul class="navbar-nav flex-grow-1">
+    <li class="nav-item">
+        <a class="nav-link text-capitalize text-black-50" asp-area="Administration" asp-controller="Roles" asp-action="CreateRole">Create role</a>
+    </li>
+</ul>
+
+<ul class="navbar-nav flex-grow-1">
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Administration" asp-controller="Products" asp-action="Create">Create new product</a>
+    </li>
+</ul>

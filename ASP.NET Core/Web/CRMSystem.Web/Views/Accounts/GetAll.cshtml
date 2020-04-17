@@ -4,14 +4,19 @@
     this.ViewData["Title"] = $"All accounts";
 }
 
-<div class="text-center">
-    <h1 class="display-3">@this.ViewData["Title"]</h1>
-    @*<cache expires-after="TimeSpan.FromDays(10)" vary-by-query="id">
+    <div class="text-center">
+        <h1 class="display-3">@this.ViewData["Title"]</h1>
+        <ul class="navbar-nav flex-grow-1">
+            <li class="nav-item">
+                <a class="nav-link text-dark text-dark-100" asp-controller="Accounts" asp-action="Create">Create an account</a>
+            </li>
+        </ul>
+        @*<cache expires-after="TimeSpan.FromDays(10)" vary-by-query="id">
             <h1 class="display-3">@DateTime.UtcNow</h1>
         </cache>*@
 
-    @*<a asp-controller="Deals" asp-action="Create">Create deal</a>*@
-</div>
+        @*<a asp-controller="Deals" asp-action="Create">Create deal</a>*@
+    </div>
 <hr />
 <div class="row">
     @foreach (var account in Model.Accounts)

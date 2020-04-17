@@ -1,0 +1,47 @@
+﻿@using CRMSystem.Web.Areas.Administration.ViewModels
+@model CreateProductViewModel
+
+@{
+    ViewBag.Title = "Create new product";
+}
+
+
+<h1 class="text-center suls-text-color">Create New Product</h1>
+<form class="mx-auto half-width col-5" method="post" action="/Administration/Products/Create">
+    <div class="top-border-line primary-separator"></div>
+    <div class="form-group">
+        <label asp-for="Name">Product Name</label>
+        <input asp-for="Name" class="form-control" required/>
+        <span asp-validation-for="Name" class="text-black-50"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Product description</label>
+        <input asp-for="Description" class="form-control" required/>
+        <span asp-validation-for="Description" class="text-black-50"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Price">Price</label>
+        <input
+               name="priceInput"
+               asp-for="Price" class="form-control"
+               type="text"
+               pattern="\d+(,\d{2})?"
+               title="Decimal separator should be ','!"
+               required/>
+        <span asp-validation-for="Price" class="text-black-50"></span>
+    </div>
+    <div class="button-holder d-flex justify-content-center">
+        <button type="submit" class="btn suls-bg-color">Create product</button>
+    </div>
+</form>
+
+
+<script>
+    function validateForm() {
+  var x = document.forms["createProduct"]["priceInput"].value;
+  if (x.Contains(".")) {
+    alert("Decimal separator must be ','!");
+    return false;
+  }
+}
+</script>
