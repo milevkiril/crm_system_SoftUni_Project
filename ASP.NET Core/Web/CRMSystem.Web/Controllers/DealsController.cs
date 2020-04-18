@@ -65,7 +65,7 @@
             {
                 Deals = this.dealsService.GetAll<DealViewModel>(),
             };
-            if(viewModel == null)
+            if (viewModel == null)
             {
                 return this.NotFound();
             }

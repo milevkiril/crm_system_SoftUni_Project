@@ -2,9 +2,11 @@
 {
     using CRMSystem.Data.Common.Repositories;
     using CRMSystem.Data.Models;
+    using CRMSystem.Services.Mapping;
     using Microsoft.AspNetCore.Identity;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     public class ProductsService : IProductService
@@ -33,6 +35,7 @@
                 UserId = userId,
                 Description = description,
                 Price = priceToConvert,
+                CreatedBy = userName,
             };
 
             await this.productRepository.AddAsync(product);
@@ -42,7 +45,10 @@
 
         public IEnumerable<T> GetAll<T>()
         {
-            throw new System.NotImplementedException();
+            var query = this.productRepository.All()
+                .OrderByDescending(x => x.CreatedOn);
+
+            return query.To<T>().ToList();
         }
 
         public T GetById<T>(int id)

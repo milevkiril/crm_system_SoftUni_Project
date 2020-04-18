@@ -4,6 +4,7 @@
     using CRMSystem.Data.Models;
     using CRMSystem.Services.Data;
     using CRMSystem.Web.Areas.Administration.ViewModels;
+    using CRMSystem.Web.Areas.Administration.ViewModels.Products;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -47,6 +48,20 @@
             var dealId = await this.productService.CreateAsync(input.Name, input.Description, priceInput.ToString(), input.UserId);
             this.TempData["InfoMessage"] = "Product created!";
             return this.Redirect("/Home/");
+        }
+
+        public IActionResult GetAll()
+        {
+            var viewModel = new AllProductsViewModel
+            {
+                Products = this.productService.GetAll<ProductViewModel>(),
+            };
+            if (viewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(viewModel);
         }
     }
 }

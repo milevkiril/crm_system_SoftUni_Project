@@ -1,0 +1,44 @@
+﻿@using CRMSystem.Common
+@model CRMSystem.Web.Areas.Administration.ViewModels.Products.AllProductsViewModel
+@{
+    this.ViewData["Title"] = $"All products";
+}
+
+<div class="text-center">
+    <h1 class="display-3">@this.ViewData["Title"]</h1>
+    @*<ul class="navbar-nav flex-grow-1">
+            <li class="nav-item">
+                <a class="nav-link text-dark text-dark-100" asp-controller="Accounts" asp-action="Create">Create an account</a>
+            </li>
+        </ul>*@
+    @*<cache expires-after="TimeSpan.FromDays(10)" vary-by-query="id">
+            <h1 class="display-3">@DateTime.UtcNow</h1>
+        </cache>*@
+
+    @*<a asp-controller="Deals" asp-action="Create">Create deal</a>*@
+</div>
+<hr />
+<div class="row">
+    @foreach (var product in Model.Products)
+    {
+
+        <div class="col-md-4 media">
+            @*<img src="@category.ImageUrl" width="100" class="mr-3" alt="@category.Title">*@
+            <div class="media-body">
+                <h5 class="mt-0">
+                    <a href="@product.Url">
+                        @product.Name
+                    </a>
+                    @product.Description
+                    @product.Price
+
+                </h5>
+                @product.CreatedBy
+                @product.CreatedOn
+            </div>
+        </div>
+        <div></div>
+    }
+</div>
+
+
