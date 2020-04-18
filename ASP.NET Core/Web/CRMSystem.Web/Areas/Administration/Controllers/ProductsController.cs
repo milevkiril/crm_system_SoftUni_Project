@@ -49,19 +49,6 @@
             this.TempData["InfoMessage"] = "Product created!";
             return this.Redirect("/Home/");
         }
-
-        public IActionResult GetAll()
-        {
-            var viewModel = new AllProductsViewModel
-            {
-                Products = this.productService.GetAll<ProductViewModel>(),
-            };
-            if (viewModel == null)
-            {
-                return this.NotFound();
-            }
-
-            return this.View(viewModel);
-        }
+        
     }
 }

@@ -1,4 +1,9 @@
-﻿@using CRMSystem.Web.Areas.Administration.ViewModels
+﻿@using (Html.BeginForm("Create", "Products"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+}
+@using CRMSystem.Web.Areas.Administration.ViewModels
 @model CreateProductViewModel
 
 @{
@@ -11,37 +16,35 @@
     <div class="top-border-line primary-separator"></div>
     <div class="form-group">
         <label asp-for="Name">Product Name</label>
-        <input asp-for="Name" class="form-control" required/>
+        <input asp-for="Name" class="form-control" required />
         <span asp-validation-for="Name" class="text-black-50"></span>
     </div>
     <div class="form-group">
         <label asp-for="Description">Product description</label>
-        <input asp-for="Description" class="form-control" required/>
+        <input asp-for="Description" class="form-control" required />
         <span asp-validation-for="Description" class="text-black-50"></span>
     </div>
     <div class="form-group">
         <label asp-for="Price">Price</label>
-        <input
-               name="priceInput"
-               asp-for="Price" class="form-control"
-               type="text"
+        @*<input asp-for="Price" class="form-control" required/>*@
+        <input asp-for="Price" class="form-control"
                pattern="\d+(,\d{2})?"
                title="Decimal separator should be ','!"
-               required/>
+               required />
         <span asp-validation-for="Price" class="text-black-50"></span>
     </div>
     <div class="button-holder d-flex justify-content-center">
-        <button type="submit" class="btn suls-bg-color">Create product</button>
+        <button input>Create product</button>
     </div>
 </form>
 
 
-<script>
+@*<script>
     function validateForm() {
-  var x = document.forms["createProduct"]["priceInput"].value;
-  if (x.Contains(".")) {
-    alert("Decimal separator must be ','!");
-    return false;
-  }
-}
-</script>
+        var x = document.forms["createProduct"]["priceInput"].value;
+        if (x.Contains(".")) {
+            alert("Decimal separator must be ','!");
+            return false;
+        }
+    }
+</script>*@
