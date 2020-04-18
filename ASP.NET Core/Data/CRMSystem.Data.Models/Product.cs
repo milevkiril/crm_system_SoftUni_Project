@@ -12,7 +12,8 @@
         public string Name { get; set; }
 
         [Required]
-        public decimal Price { get; set; }
+        [RegularExpression(@"\d+(,\d{2})?")]
+        public string Price { get; set; }
 
         [Required]
         public string Description { get; set; }

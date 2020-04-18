@@ -26,7 +26,7 @@
         {
             var user = await this.userManager.FindByIdAsync(userId);
             var userName = user.UserName;
-            decimal priceToConvert = decimal.Parse(priceInput);
+            //decimal priceToConvert = decimal.Parse(priceInput);
 
 
             var product = new Product
@@ -34,7 +34,7 @@
                 Name = productName,
                 UserId = userId,
                 Description = description,
-                Price = priceToConvert,
+                Price = priceInput,
                 CreatedBy = userName,
             };
 
