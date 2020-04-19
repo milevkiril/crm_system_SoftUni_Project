@@ -98,6 +98,12 @@
                .HasOne(dp => dp.Product)
                .WithMany(p => p.Deals)
                .HasForeignKey(dp => dp.ProductId);
+
+            builder
+                .Entity<Account>()
+                .HasMany(a => a.Deals)
+                .WithOne(d => d.Account)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)
