@@ -67,7 +67,7 @@ namespace CRMSystem.Web.Areas.Administration.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", product.UserId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FirstName", product.UserId);
             ViewData["CreatedBy"] = new SelectList(_context.Users, "FirstName", "FirstName", product.CreatedBy);
             return View(product);
         }
@@ -85,7 +85,7 @@ namespace CRMSystem.Web.Areas.Administration.Controllers
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", product.UserId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FirstName", product.UserId);
             return View(product);
         }
 
@@ -159,5 +159,6 @@ namespace CRMSystem.Web.Areas.Administration.Controllers
         {
             return _context.Products.Any(e => e.Id == id);
         }
+
     }
 }

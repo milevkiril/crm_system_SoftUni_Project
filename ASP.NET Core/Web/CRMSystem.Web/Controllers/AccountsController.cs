@@ -1,10 +1,14 @@
 ﻿using AutoMapper;
+using CRMSystem.Data;
+using CRMSystem.Data.Common.Repositories;
 using CRMSystem.Data.Models;
 using CRMSystem.Services.Data;
 using CRMSystem.Web.ViewModels.Accounts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +20,17 @@ namespace CRMSystem.Web.Controllers
     {
         private readonly IAccountsService accountsService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ApplicationDbContext context;
         private readonly IMapper mapper;
 
         public AccountsController(
             IAccountsService accountsService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            ApplicationDbContext context)
         {
             this.accountsService = accountsService;
             this.userManager = userManager;
+            this.context = context;
         }
 
         public IActionResult ById(int id)
@@ -93,6 +100,114 @@ namespace CRMSystem.Web.Controllers
             };
 
             return this.View(viewModel);
+        }
+
+        // GET: Administration/Products/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var account = await context.Accounts.FindAsync(id);
+            if (account == null)
+            {
+                return NotFound();
+            }
+            ViewData["UserId"] = new SelectList(context.Users, "Id", "FirstName", account.UserId);
+            return View(account);
+        }
+
+        // POST: Administration/Products/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("AccountName,AccountOwner,UserId,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn, TypeAccount")] Account account)
+        {
+            if (id != account.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    context.Update(account);
+                    await context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!AccountExists(account.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["UserId"] = new SelectList(context.Users, "Id", "FirstName", account.UserId);
+            return View(account);
+        }
+
+        // GET: Administration/Products/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = await context.Accounts
+                .Include(p => p.User)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
+        }
+
+
+        // GET: Administration/Products/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = await context.Accounts
+                .Include(p => p.User)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
+        }
+
+        // POST: Administration/Products/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var product = await context.Accounts.FindAsync(id);
+            context.Accounts.Remove(product);
+            await context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool AccountExists(int id)
+        {
+            return context.Accounts.Any(e => e.Id == id);
         }
     }
 }

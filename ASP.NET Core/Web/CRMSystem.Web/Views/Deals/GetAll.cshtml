@@ -22,12 +22,13 @@
             <div class="media-body">
                 <h5 class="mt-0">
                     <a href="@deal.Url">
-                        @deal.AccountName
+                        @deal.Name
                     </a>
 
                 </h5>
+                @deal.AccountName
                 @deal.DealOwner
-            <time datetime="@deal.CreatedOn.ToString("O")"></time>
+                <time datetime="@deal.CreatedOn.ToString("O")"></time>
             </div>
         </div>
         <div></div>
