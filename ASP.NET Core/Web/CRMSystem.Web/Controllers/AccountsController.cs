@@ -149,10 +149,11 @@ namespace CRMSystem.Web.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
             ViewData["UserId"] = new SelectList(context.Users, "Id", "FirstName", account.UserId);
-            return View(account);
+
+
+            return this.RedirectToAction("GetAll");
         }
 
         // GET: Administration/Products/Details/5

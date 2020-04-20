@@ -16,8 +16,6 @@
 
         public string DealOwner { get; set; }
 
-        public string AccountName { get; set; }
-
         [Required]
         public string UserId { get; set; }
 

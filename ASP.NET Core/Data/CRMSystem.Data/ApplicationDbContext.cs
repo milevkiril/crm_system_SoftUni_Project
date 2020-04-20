@@ -104,6 +104,7 @@
                 .HasMany(a => a.Deals)
                 .WithOne(d => d.Account)
                 .OnDelete(DeleteBehavior.Cascade);
+
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

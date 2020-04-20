@@ -43,7 +43,7 @@
 
             Stage stage = (Stage)Enum.ToObject(typeof(AccountType), input.Stage);
 
-            var dealId = await this.dealsService.CreateAsync(input.Name, input.UserId, input.Description, stage, input.AccountId, input.AccountName);
+            var dealId = await this.dealsService.CreateAsync(input.Name, input.UserId, input.Description, stage, input.AccountId);
             this.TempData["InfoMessage"] = "Deal created!";
             return this.Redirect("/Deals/GetAll");
         }

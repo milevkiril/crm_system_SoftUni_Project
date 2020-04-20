@@ -6,7 +6,7 @@
 
     public interface IDealsService
     {
-        Task<int> CreateAsync(string dealName, string userId, string description, Stage stage, int accountId, string accountName);
+        Task<int> CreateAsync(string dealName, string userId, string description, Stage stage, int accountId);
 
         IEnumerable<T> GetAll<T>();
 
