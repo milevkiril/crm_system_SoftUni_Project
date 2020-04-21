@@ -8,6 +8,9 @@
     public class Account : BaseDeletableModel<int>
     {
         [Required]
+        public int Id { get; set; }
+
+        [Required]
         public string AccountName { get; set; }
 
         public Information Details { get; set; }

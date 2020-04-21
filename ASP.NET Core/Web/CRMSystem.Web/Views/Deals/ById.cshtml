@@ -1,4 +1,6 @@
-﻿@model CRMSystem.Web.ViewModels.Deals.DealViewModel
+﻿@using System.Security.Claims;
+
+@model CRMSystem.Web.ViewModels.Deals.DealViewModel
 @{
     this.ViewData["Title"] = Model.Name;
     void DisplayDeals(int? accountId)
@@ -9,7 +11,7 @@
         //    return;
         //}
 
-        
+
     }
 }
 
@@ -54,9 +56,16 @@
                     </div>
                 </div>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                    @if (this.User.IsInRole("Administrator") || this.User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.UserId)
+                    {
+                        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                    }
                     <a asp-action="Details" asp-route-id="@Model.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                    @if (this.User.IsInRole("Administrator"))
+                    {
+                <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                    }
+                    
                 </td>
                 @*<div class="card-body">
                         <article>
@@ -114,7 +123,7 @@
 
 @section Scripts {
     <script>
-    function showAddDealForm(parentId) {
+        function showAddDealForm(parentId) {
             $("#AddDealForm input[name='ParentId']").val(parentId);
             $("#AddDealForm").show();
             $([document.documentElement, document.body]).animate({

@@ -15,6 +15,8 @@
 
         public string UserUserName { get; set; }
 
+        public string UserId { get; set; }
+
         public string Url => $"/Accounts/{this.Id}";
 
         //public Information Details { get; set; }

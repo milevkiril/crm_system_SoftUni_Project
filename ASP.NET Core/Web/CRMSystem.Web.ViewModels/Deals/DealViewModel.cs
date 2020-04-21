@@ -13,6 +13,8 @@ namespace CRMSystem.Web.ViewModels.Deals
 
         public string Description { get; set; }
 
+        public string UserId { get; set; }
+
         public Stage Stage { get; set; }
 
         public string UserUserName { get; set; }

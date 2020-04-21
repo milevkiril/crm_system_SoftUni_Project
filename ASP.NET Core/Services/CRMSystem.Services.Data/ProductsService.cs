@@ -52,7 +52,9 @@
 
         public T GetById<T>(int id)
         {
-            throw new System.NotImplementedException();
+            var product = this.productRepository.All().Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+            return product;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace CRMSystem.Web.Controllers
 {
+    using CRMSystem.Common;
     using CRMSystem.Data;
     using CRMSystem.Data.Models;
     using CRMSystem.Data.Models.Enumerators;
@@ -12,6 +13,7 @@
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     public class DealsController : Controller
@@ -80,29 +82,37 @@
             return this.View(viewModel);
         }
 
-        // GET: Administration/Products/Edit/5
+        // GET: 
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
+            var deal = await context.Deals.FindAsync(id);
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var deal = await context.Deals.FindAsync(id);
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) != deal.UserId)
+            {
+                return this.RedirectToAction("GetAll");
+            }
+
             if (deal == null)
             {
                 return NotFound();
             }
             ViewData["UserId"] = new SelectList(context.Users, "Id", "FirstName", deal.UserId);
+            ViewData["AccountId"] = context.Accounts.Select(x => new SelectListItem(x.AccountName, x.Id.ToString()));
+            //ViewData["AccountId"] = new SelectList(context.Accounts, "Id", "AccountName", deal.AccountId); Питай Ники и Стоян защо не работи
             return View(deal);
         }
 
-        // POST: Administration/Products/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST:
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,UserId,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn, Stage")] Deal deal)
+        [Authorize]
+        public async Task<IActionResult> Edit(int id, [Bind("Name,UserId,AccountId,IsDeleted,DeletedOn,CreatedOn, Id,ModifiedOn,Stage")] Deal deal)
         {
             if (id != deal.Id)
             {
@@ -129,14 +139,16 @@
                 }
             }
             ViewData["UserId"] = new SelectList(context.Users, "Id", "FirstName", deal.UserId);
+            ViewData["AccountId"] = new SelectList(context.Accounts, "Id", "Id", deal.AccountId);
 
 
             return this.RedirectToAction("GetAll");
         }
 
-        // GET: Administration/Products/Details/5
+        // GET:
         public async Task<IActionResult> Details(int? id)
         {
+
             if (id == null)
             {
                 return NotFound();
@@ -145,6 +157,12 @@
             var deal = await context.Deals
                 .Include(d => d.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) != deal.UserId)
+            {
+                return this.RedirectToAction("GetAll");
+            }
+
             if (deal == null)
             {
                 return NotFound();
@@ -153,7 +171,7 @@
             return View(deal);
         }
 
-        // GET: Administration/Products/Delete/5
+        // GET:
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -164,6 +182,12 @@
             var deal = await context.Deals
                 .Include(d => d.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) != deal.UserId)
+            {
+                return this.RedirectToAction("GetAll");
+            }
+
             if (deal == null)
             {
                 return NotFound();
@@ -172,7 +196,7 @@
             return View(deal);
         }
 
-        // POST: Administration/Products/Delete/5
+        // POST:
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize]

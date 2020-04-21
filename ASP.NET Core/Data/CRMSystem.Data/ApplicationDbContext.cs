@@ -104,6 +104,11 @@
                 .HasMany(a => a.Deals)
                 .WithOne(d => d.Account)
                 .OnDelete(DeleteBehavior.Cascade);
+            builder
+                .Entity<Deal>()
+                .HasOne(d => d.Account)
+                .WithMany(a => a.Deals)
+                .HasForeignKey(d => d.AccountId);
 
         }
 

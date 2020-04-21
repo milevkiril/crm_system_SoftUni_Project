@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CRMSystem.Common;
 using CRMSystem.Data;
 using CRMSystem.Data.Common.Repositories;
 using CRMSystem.Data.Models;
@@ -12,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CRMSystem.Web.Controllers
@@ -112,6 +114,12 @@ namespace CRMSystem.Web.Controllers
             }
 
             var account = await context.Accounts.FindAsync(id);
+
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) != account.UserId)
+            {
+                return this.RedirectToAction("GetAll");
+            }
+
             if (account == null)
             {
                 return NotFound();
@@ -125,6 +133,7 @@ namespace CRMSystem.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("AccountName,AccountOwner,UserId,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn, TypeAccount")] Account account)
         {
             if (id != account.Id)
@@ -178,6 +187,7 @@ namespace CRMSystem.Web.Controllers
 
 
         // GET: Administration/Products/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -188,6 +198,12 @@ namespace CRMSystem.Web.Controllers
             var account = await context.Accounts
                 .Include(p => p.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) != account.UserId)
+            {
+                return this.RedirectToAction("GetAll");
+            }
+
             if (account == null)
             {
                 return NotFound();

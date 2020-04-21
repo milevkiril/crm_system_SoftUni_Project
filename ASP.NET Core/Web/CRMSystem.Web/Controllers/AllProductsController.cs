@@ -2,7 +2,7 @@
 {
     using CRMSystem.Data.Models;
     using CRMSystem.Services.Data;
-    using CRMSystem.Web.Areas.Administration.ViewModels.Products;
+    using CRMSystem.Web.ViewModels.Products;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     
@@ -32,6 +32,17 @@
             }
 
             return this.View(viewModel);
+        }
+
+        public IActionResult ById(int id)
+        {
+            var productViewModel = this.productService.GetById<ProductViewModel>(id);
+            if (productViewModel == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(productViewModel);
         }
     }
 }

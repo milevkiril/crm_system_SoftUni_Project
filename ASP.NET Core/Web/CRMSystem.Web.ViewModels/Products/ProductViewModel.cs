@@ -1,4 +1,4 @@
-﻿namespace CRMSystem.Web.Areas.Administration.ViewModels.Products
+﻿namespace CRMSystem.Web.ViewModels.Products
 {
     using CRMSystem.Data.Models;
     using CRMSystem.Services.Mapping;
@@ -6,6 +6,7 @@
 
     public class ProductViewModel : IMapFrom<Product>
     {
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -16,6 +17,6 @@
 
         public DateTime CreatedOn { get; set; }
 
-        public string Url => $"/Products/GetAll";
+        public string Url => $"/AllProducts/{this.Id}";
     }
 }

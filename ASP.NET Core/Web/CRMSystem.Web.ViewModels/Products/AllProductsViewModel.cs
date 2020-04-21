@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CRMSystem.Web.Areas.Administration.ViewModels.Products
+namespace CRMSystem.Web.ViewModels.Products
 {
     public class AllProductsViewModel
     {
