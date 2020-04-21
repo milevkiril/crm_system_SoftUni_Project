@@ -67,8 +67,8 @@ namespace CRMSystem.Web.Areas.Administration.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FirstName", product.UserId);
-            ViewData["CreatedBy"] = new SelectList(_context.Users, "FirstName", "FirstName", product.CreatedBy);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", product.UserId);
+            ViewData["CreatedBy"] = new SelectList(_context.Users, "FirstName", "FirstName", product.User.UserName);
             return View(product);
         }
 

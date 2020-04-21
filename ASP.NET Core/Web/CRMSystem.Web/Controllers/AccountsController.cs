@@ -43,6 +43,7 @@ namespace CRMSystem.Web.Controllers
 
             return this.View(postViewModel);
         }
+
         public IActionResult ByName(string name, int page = 1)
         {
             var viewModel =

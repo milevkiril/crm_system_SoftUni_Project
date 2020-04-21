@@ -22,6 +22,8 @@
         [Required]
         public string InvoiceCode { get; set; }
 
+        public int ContactId { get; set; }
+
         public Contact Representative { get; set; }
     }
 }

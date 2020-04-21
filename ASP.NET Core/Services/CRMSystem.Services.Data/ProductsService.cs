@@ -35,7 +35,6 @@
                 UserId = userId,
                 Description = description,
                 Price = priceInput,
-                CreatedBy = userName,
             };
 
             await this.productRepository.AddAsync(product);

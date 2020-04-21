@@ -14,8 +14,6 @@
 
         public Stage Stage { get; set; }
 
-        public string DealOwner { get; set; }
-
         [Required]
         public string UserId { get; set; }
 

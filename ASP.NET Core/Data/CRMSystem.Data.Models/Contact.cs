@@ -6,8 +6,6 @@
 
     public class Contact : BaseDeletableModel<int>
     {
-        [Required]
-        public int ContactId { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -30,8 +28,6 @@
         public int DealId { get; set; }
 
         public Deal Deal { get; set; }
-
-        public string CreatedBy { get; set; }
 
         [Required]
         public int UserId { get; set; }

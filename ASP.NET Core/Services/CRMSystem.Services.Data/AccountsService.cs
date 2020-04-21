@@ -24,14 +24,12 @@
         public async Task<int> CreateAsync(string accountName, string userId, AccountType typeAccount)
         {
             var user = await this.userManager.FindByIdAsync(userId);
-            var userName = user.UserName;
 
             var account = new Account
             {
                 AccountName = accountName,
                 UserId = userId,
                 TypeAccount = typeAccount,
-                AccountOwner = userName,
             };
 
             await this.accountReposityory.AddAsync(account);

@@ -17,8 +17,6 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        public string AccountOwner { get; set; }
-
         [Required]
         public AccountType TypeAccount { get; set; }
 

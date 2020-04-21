@@ -18,8 +18,6 @@
         [Required]
         public string Description { get; set; }
 
-        public string CreatedBy { get; set; }
-
         [Required]
         public string UserId { get; set; }
 

@@ -30,18 +30,11 @@
             var user = await this.userManager.FindByIdAsync(userId);
             var userName = user.UserName;
 
-            var account = this.accountRepository
-                .All()
-                .Where(x => x.Id == accountId)
-                .FirstOrDefault();
-            var accountName = account.AccountName;
-            accountId = account.Id;
 
             var deal = new Deal
             {
                 Name = dealName,
                 UserId = userId,
-                DealOwner = userName,
                 AccountId = accountId,
                 Description = description,
                 Stage = stage,
