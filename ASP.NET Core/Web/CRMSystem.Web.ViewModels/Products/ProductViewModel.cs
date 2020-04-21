@@ -10,7 +10,7 @@
 
         public string Description { get; set; }
 
-        public string CreatedBy { get; set; }
+        public string UserUserName { get; set; }
 
         public string Price { get; set; }
 

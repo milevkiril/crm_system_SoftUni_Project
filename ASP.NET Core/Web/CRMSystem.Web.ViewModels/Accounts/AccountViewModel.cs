@@ -13,7 +13,7 @@
 
         public string AccountName { get; set; }
 
-        public string AccountOwner { get; set; }
+        public string UserUserName { get; set; }
 
         public string Url => $"/Accounts/{this.Id}";
 

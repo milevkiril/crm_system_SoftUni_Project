@@ -35,13 +35,13 @@ namespace CRMSystem.Web.Controllers
 
         public IActionResult ById(int id)
         {
-            var postViewModel = this.accountsService.GetById<AccountViewModel>(id);
-            if (postViewModel == null)
+            var accountViewModel = this.accountsService.GetById<AccountViewModel>(id);
+            if (accountViewModel == null)
             {
                 return this.NotFound();
             }
 
-            return this.View(postViewModel);
+            return this.View(accountViewModel);
         }
 
         public IActionResult ByName(string name, int page = 1)
@@ -165,15 +165,15 @@ namespace CRMSystem.Web.Controllers
                 return NotFound();
             }
 
-            var product = await context.Accounts
-                .Include(p => p.User)
+            var account = await context.Accounts
+                .Include(a => a.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (product == null)
+            if (account == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(account);
         }
 
 
@@ -185,24 +185,25 @@ namespace CRMSystem.Web.Controllers
                 return NotFound();
             }
 
-            var product = await context.Accounts
+            var account = await context.Accounts
                 .Include(p => p.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (product == null)
+            if (account == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(account);
         }
 
         // POST: Administration/Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await context.Accounts.FindAsync(id);
-            context.Accounts.Remove(product);
+            var account = await context.Accounts.FindAsync(id);
+            context.Accounts.Remove(account);
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
