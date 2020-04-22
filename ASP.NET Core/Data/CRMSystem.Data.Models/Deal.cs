@@ -32,5 +32,7 @@
         public decimal Amount { get; set; } // The total amount of the deal
 
         public virtual ICollection<Contact> Contacts { get; set; } = new HashSet<Contact>();
+
+        public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
     }
 }

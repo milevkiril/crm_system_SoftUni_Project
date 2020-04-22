@@ -4,14 +4,16 @@ using CRMSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CRMSystem.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200422201225_OrderModelAdd")]
+    partial class OrderModelAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -375,34 +377,20 @@ namespace CRMSystem.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DealId")
+                    b.Property<int>("dealId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ProductId")
+                    b.Property<int>("productId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int>("quantity")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DealId");
+                    b.HasIndex("dealId");
 
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("ProductId");
+                    b.HasIndex("productId");
 
                     b.ToTable("Orders");
                 });
@@ -669,13 +657,13 @@ namespace CRMSystem.Data.Migrations
                 {
                     b.HasOne("CRMSystem.Data.Models.Deal", "Deal")
                         .WithMany("Orders")
-                        .HasForeignKey("DealId")
+                        .HasForeignKey("dealId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("CRMSystem.Data.Models.Product", "Product")
                         .WithMany("Orders")
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("productId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

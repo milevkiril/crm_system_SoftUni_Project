@@ -27,5 +27,7 @@
         public virtual ApplicationUser User { get; set; }
 
         public virtual ICollection<DealsProductsQuantity> Deals { get; set; } = new HashSet<DealsProductsQuantity>();
+
+        public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
     }
 }

@@ -36,6 +36,8 @@
 
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
 
         public override int SaveChanges() => this.SaveChanges(true);
 
