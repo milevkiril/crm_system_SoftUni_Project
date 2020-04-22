@@ -19,5 +19,14 @@ namespace CRMSystem.Data.Models
 
         [Required]
         public int Quantity { get; set; }
+
+        public decimal Price
+        { 
+            get
+            {
+                decimal price = decimal.Parse(this.Product.Price);
+                return price * this.Quantity;
+            }
+        }
     }
 }

@@ -1,11 +1,13 @@
-﻿using AutoMapper;
-using CRMSystem.Data.Models;
-using CRMSystem.Data.Models.Enumerators;
-using CRMSystem.Services.Mapping;
-using System;
-
-namespace CRMSystem.Web.ViewModels.Deals
+﻿namespace CRMSystem.Web.ViewModels.Deals
 {
+    using AutoMapper;
+    using CRMSystem.Data.Models;
+    using CRMSystem.Data.Models.Enumerators;
+    using CRMSystem.Services.Mapping;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+
     public class DealViewModel : IMapFrom<Deal>
     {
         public int Id { get; set; }
@@ -22,6 +24,8 @@ namespace CRMSystem.Web.ViewModels.Deals
         public string AccountAccountName { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public IEnumerable<OrderDealViewModel> Orders { get; set; }
 
         public string Url => $"/Deals/{this.Id}";
     }
