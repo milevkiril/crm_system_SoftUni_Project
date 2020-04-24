@@ -1,0 +1,40 @@
+﻿@using (Html.BeginForm("Create", "Order"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+}
+@model CRMSystem.Web.ViewModels.Orders.CreateOrderViewModel
+@{
+    this.ViewData["Title"] = "Create new order";
+}
+
+<h1>@this.ViewData["Title"]</h1>
+
+
+<form method="post" asp-action="Create">
+    <div>
+        <label asp-for="DealId"></label>
+        <input asp-for="DealId" class="form-control" />
+        <span asp-validation-for="DealId" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="ProductId"></label>
+        <input asp-for="ProductId" class="form-control" />
+        <span asp-validation-for="ProductId" class="text-danger"></span>
+    </div>
+
+
+
+    <div>
+        <label asp-for="Quantity"></label>
+        <input asp-for="Quantity" class="form-control" />
+        <span asp-validation-for="Quantity" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <hr />
+    <input type="submit" class="btn btn-primary" />
+</form>

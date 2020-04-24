@@ -4,6 +4,6 @@ namespace CRMSystem.Services.Data
 {
     public interface IOrdersService
     {
-        Task Create(int dealId, int productId, int quantity);
+        Task<int> CreateAsync(int dealId, int productId, int quantity);
     }
 }

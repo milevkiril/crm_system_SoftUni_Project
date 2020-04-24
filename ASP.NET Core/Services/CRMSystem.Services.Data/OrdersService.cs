@@ -13,7 +13,7 @@
             this.orderRepository = orderRepository;
         }
 
-        public async Task Create(int dealId, int productId, int quantity)
+        public async Task<int> CreateAsync(int dealId, int productId, int quantity)
         {
             var order = new Order
             {
@@ -23,6 +23,8 @@
             };
             await this.orderRepository.AddAsync(order);
             await this.orderRepository.SaveChangesAsync();
+
+            return order.Id;
         }
     }
 }

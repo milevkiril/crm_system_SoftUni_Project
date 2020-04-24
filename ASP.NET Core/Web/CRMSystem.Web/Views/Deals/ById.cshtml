@@ -3,7 +3,7 @@
 @model CRMSystem.Web.ViewModels.Deals.DealViewModel
 @{
     this.ViewData["Title"] = Model.Name;
-    void DisplayDeals(int? accountId)
+    void DisplayOrders(int? orderId)
     {
         var orders = this.Model.Orders.Where(x => x.DealId == Model.Id);
         if (!orders.Any())
@@ -23,12 +23,13 @@
                                     <div class="media-body ml-3">
                                         @order.ProductName
                                     </div>
-                                    <div class="text-muted small ml-3">
+                                    @*<div class="text-muted small ml-3">
                                         @if (this.User.Identity.IsAuthenticated)
                                         {
                                             <div class="px-4 pt-3"> <button type="button" class="btn btn-secondary" onclick="AddOrderForm(@order.Id)"><i class="fa fa-plus"></i>&nbsp; Order</button> </div>
                                         }
                                     </div>
+                                    @{ DisplayOrders(order.Id); }*@
                                 </div>
                             </div>
                             <div class="card-body">                                
@@ -65,7 +66,7 @@
                                 <time datetime="@Model.CreatedOn.ToString("O")"></time>
                             </div>
 
-                            Type: @Model.Stage
+                            Stage: @Model.Stage
                         </div>
                         @*<div class="text-muted small ml-3">
                                 <form id="votesForm" method="post"></form>
@@ -93,17 +94,33 @@
                     {
                         <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
                     }
+                <div>
+                    <form asp-controller="Orders" asp-action="Create" method="post">
+                        
+                        @**<div>
+                <label for="AccountName"></label>
+                <textarea name="AccountName" id="AccountName" class="form-control"></textarea>
+            </div>*<div>
+                <label for="AccountName"></label>
+                <textarea name="AccountName" id="AccountName" class="form-control"></textarea>
+            </div>*@
+                        <div>
+                            <input type="submit" class="btn btn-primary" value="Create new deal" />
+                        </div>
+                    </form>
+                </div>
 
                 </td>
                 <div class="card-body">
-                        
-                        @if (this.User.Identity.IsAuthenticated)
-                        {
-                            <div class="px-4 pt-3"> <button type="button" class="btn btn-primary float-right" onclick="showAddOrderForm(0)"><i class="fa fa-plus"></i>&nbsp; Order</button> </div>
-                            <div class="clearfix"></div>
-                        }
-                        
-                    </div>
+
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                        <div class="px-4 pt-3"> <button type="button" class="btn btn-primary float-right" onclick="showAddOrderForm(0)"><i class="fa fa-plus"></i>&nbsp; Order</button> </div>
+                        <div class="clearfix"></div>
+                    }
+                    @{ DisplayOrders(null); }
+
+                </div>
             </div>
         </div>
     </div>
