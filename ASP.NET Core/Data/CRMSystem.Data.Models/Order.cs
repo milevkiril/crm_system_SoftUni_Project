@@ -5,8 +5,6 @@ namespace CRMSystem.Data.Models
 {
     public class Order : BaseDeletableModel<int>
     {
-        public int Id { get; set; }
-
         [Required]
         public int DealId { get; set; }
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
+    <title>@this.ViewData["Title"] - CustomDynamics</title>
 
     <environment names="Development">
         <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
@@ -77,8 +77,15 @@
                 </form>
             </div>
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse text-center">
+                @*<div></div>
+        <partial name="_LoginPartial" />
+        <div></div>*@
                 <div></div>
-                <partial name="_LoginPartial" />
+                <div></div>
+                    <li class="nav-item">
+                        <partial name="_LoginPartial" />
+                    </li>
+                    <div></div>
                 <div></div>
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
@@ -126,17 +133,17 @@
                     <!-- Navbar Header-->
                     <div class="navbar-header">
                         <!-- Navbar Brand --><a href="index.html" class="navbar-brand d-none d-sm-inline-block">
-                            <div class="brand-text d-none d-lg-inline-block"><span>CRM </span><strong>System</strong></div>
-                            <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>CRM System</strong></div>
+                            <div class="brand-text d-none d-lg-inline-block"><span>Custom </span><strong>Dynamics</strong></div>
+                            @*<div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>CRM System</strong></div>*@
                         </a>
-                        <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
+                        <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn disabled"><span></span><span></span><span></span></a>
                     </div>
                     <!-- Navbar Menu -->
                     <ul class="nav-menu list-group-horizontal-lg d-flex flex-md-row align-items-md-center">
 
 
                         <!-- Search-->
-                        <li class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="icon-search"></i></a></li>
+                        @*<li class="nav-item d-flex align-items-center"><a id="search" href="#"><i class="icon-search"></i></a></li>*@
                         @* <!-- Notifications-->
                     <li class="nav-item dropdown">
                         <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell-o"></i><span class="badge bg-red badge-corner">12</span></a>

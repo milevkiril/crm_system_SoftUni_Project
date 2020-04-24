@@ -16,22 +16,29 @@
 <div class="row">
     @foreach (var deal in Model.Deals)
     {
-
+    <ul>
         <div class="col-md-4 media">
             @*<img src="@category.ImageUrl" width="100" class="mr-3" alt="@category.Title">*@
             <div class="media-body">
-                <h5 class="mt-0">
+                <h3 class="mt-0">
                     <a href="@deal.Url">
                         @deal.Name
                     </a>
 
-                </h5>
-                @deal.AccountAccountName
-                @deal.UserUserName
-                <time datetime="@deal.CreatedOn.ToString("O")"></time>
+                </h3>
+                <dl>
+                    <dt>Account</dt>
+                    <dd>@deal.AccountAccountName</dd>
+                    <dt>Owner of the deal</dt>
+                    <dd>@deal.UserUserName</dd>
+                    <dt>Created</dt>
+                    <dd><time datetime="@deal.CreatedOn.ToString("O")"></time></dd>
+
+                </dl>
             </div>
         </div>
         <div></div>
+    </ul>
     }
 </div>
 
