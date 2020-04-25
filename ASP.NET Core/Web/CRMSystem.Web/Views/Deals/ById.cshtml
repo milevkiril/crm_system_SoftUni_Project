@@ -95,8 +95,8 @@
                         <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
                     }
                 <div>
-                    <form asp-controller="Orders" asp-action="Create">
-                        
+                   
+                        <a asp-controller="Orders" asp-action="Create" >Create new order</a>  
                         @**<div>
                 <label for="AccountName"></label>
                 <textarea name="AccountName" id="AccountName" class="form-control"></textarea>
@@ -104,10 +104,7 @@
                 <label for="AccountName"></label>
                 <textarea name="AccountName" id="AccountName" class="form-control"></textarea>
             </div>*@
-                        <div>
-                            <input type="submit" class="btn btn-primary" value="Create new deal" />
-                        </div>
-                    </form>
+                       
                 </div>
 
                 </td>

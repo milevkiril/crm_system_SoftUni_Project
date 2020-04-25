@@ -40,34 +40,36 @@ namespace CRMSystem.Web.Controllers
             var accountViewModel = this.accountsService.GetById<AccountViewModel>(id);
             if (accountViewModel == null)
             {
-                return this.NotFound();
+                this.TempData["InfoMessage"] = "Account not founded!";
+                return this.Redirect("/Accounts/GetAll");
             }
 
             return this.View(accountViewModel);
         }
 
-        public IActionResult ByName(string name, int page = 1)
-        {
-            var viewModel =
-                this.accountsService.GetByName<AccountViewModel>(name);
-            if (viewModel == null)
-            {
-                return this.NotFound();
-            }
+        //public IActionResult ByName(string name, int page = 1)
+        //{
+            
+        //    var viewModel =
+        //        this.accountsService.GetByName<AccountViewModel>(name);
+        //    if (viewModel == null)
+        //    {
+        //        return this.NotFound();
+        //    }
 
-            //viewModel.ForumPosts = this.postsService.GetByCategoryId<PostInCategoryViewModel>(viewModel.Id, ItemsPerPage, (page - 1) * ItemsPerPage);
+        //    //viewModel.ForumPosts = this.postsService.GetByCategoryId<PostInCategoryViewModel>(viewModel.Id, ItemsPerPage, (page - 1) * ItemsPerPage);
 
-            //var count = this.postsService.GetCountByCategoryId(viewModel.Id);
-            //viewModel.PagesCount = (int)Math.Ceiling((double)count / ItemsPerPage);
-            //if (viewModel.PagesCount == 0)
-            //{
-            //    viewModel.PagesCount = 1;
-            //}
+        //    //var count = this.postsService.GetCountByCategoryId(viewModel.Id);
+        //    //viewModel.PagesCount = (int)Math.Ceiling((double)count / ItemsPerPage);
+        //    //if (viewModel.PagesCount == 0)
+        //    //{
+        //    //    viewModel.PagesCount = 1;
+        //    //}
 
-            //viewModel.CurrentPage = page;
+        //    //viewModel.CurrentPage = page;
 
-            return this.View(viewModel);
-        }
+        //    return this.View(viewModel);
+        //}
 
         public IActionResult Create()
         {
@@ -114,17 +116,18 @@ namespace CRMSystem.Web.Controllers
             }
 
             var account = await context.Accounts.FindAsync(id);
+            if (account == null)
+            {
+                return this.RedirectToAction("GetAll");
+            }
 
             if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) != account.UserId)
             {
                 return this.RedirectToAction("GetAll");
             }
 
-            if (account == null)
-            {
-                return NotFound();
-            }
-            ViewData["UserId"] = new SelectList(context.Users, "Id", "FirstName", account.UserId);
+            
+            ViewData["UserId"] = new SelectList(context.Users, "Id", "UserName", account.UserId);
             return View(account);
         }
 
@@ -160,7 +163,8 @@ namespace CRMSystem.Web.Controllers
                     }
                 }
             }
-            ViewData["UserId"] = new SelectList(context.Users, "Id", "FirstName", account.UserId);
+
+            ViewData["UserId"] = new SelectList(context.Users, "Id", "UserName", account.UserId);
 
 
             return this.RedirectToAction("GetAll");

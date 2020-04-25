@@ -50,7 +50,7 @@ namespace CRMSystem.Web.Areas.Administration.Controllers
         public IActionResult Create()
         {
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
-            ViewData["CreatedBy"] = new SelectList(_context.Users, "FirstName", "FirstName");
+            ViewData["FirstName"] = new SelectList(_context.Users, "Id", "FirstName");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace CRMSystem.Web.Areas.Administration.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Price,Description,CreatedBy,UserId,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] Product product)
+        public async Task<IActionResult> Create([Bind("Id,Name,Price,Description,UserId,IsDeleted,DeletedOn,CreatedOn,ModifiedOn")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +68,7 @@ namespace CRMSystem.Web.Areas.Administration.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", product.UserId);
-            ViewData["CreatedBy"] = new SelectList(_context.Users, "FirstName", "FirstName", product.User.UserName);
+            ViewData["FirstName"] = new SelectList(_context.Users, "Id", "FirstName", product.UserId);
             return View(product);
         }
 

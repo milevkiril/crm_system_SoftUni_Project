@@ -59,10 +59,12 @@
 
         public IActionResult ById(int id)
         {
+
             var dealViewModel = this.dealsService.GetById<DealViewModel>(id);
             if (dealViewModel == null)
             {
-                return this.NotFound();
+                this.TempData["InfoMessage"] = "Deal not founded!";
+                return this.Redirect("/Deals/GetAll");
             }
 
             return this.View(dealViewModel);
@@ -88,9 +90,10 @@
         {
             var deal = await context.Deals.FindAsync(id);
 
-            if (id == null)
+            if (id == null || deal == null)
             {
-                return NotFound();
+                this.TempData["InfoMessage"] = "Deal not founded!";
+                return this.Redirect("/Deals/GetAll");
             }
 
             if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) != deal.UserId)
@@ -158,7 +161,13 @@
                 .Include(d => d.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) != deal.UserId)
+            if (deal == null)
+            {
+                this.TempData["InfoMessage"] = "Deal not founded!";
+                return this.Redirect("/Deals/GetAll");
+            }
+
+            if (this.User.FindFirstValue(ClaimTypes.NameIdentifier) != deal.UserId)
             {
                 return this.RedirectToAction("GetAll");
             }
@@ -182,6 +191,12 @@
             var deal = await context.Deals
                 .Include(d => d.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (deal == null)
+            {
+                this.TempData["InfoMessage"] = "Deal not founded!";
+                return this.Redirect("/Deals/GetAll");
+            }
 
             if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.FindFirstValue(ClaimTypes.NameIdentifier) != deal.UserId)
             {

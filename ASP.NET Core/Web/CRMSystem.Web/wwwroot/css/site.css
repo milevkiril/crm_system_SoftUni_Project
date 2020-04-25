@@ -45,8 +45,14 @@ body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
 }
+
+page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
 .footer {
-    position:relative;
+    position:absolute;
     bottom: 0;
     width: 100%;
     white-space: nowrap;

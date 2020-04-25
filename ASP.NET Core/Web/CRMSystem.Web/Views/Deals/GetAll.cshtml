@@ -9,37 +9,51 @@
     @*<cache expires-after="TimeSpan.FromDays(10)" vary-by-query="id">
             <h1 class="display-3">@DateTime.UtcNow</h1>
         </cache>*@
-
+    <link rel="stylesheet" type="text/css" href="~/css/site.css" />
     @*<a asp-controller="Deals" asp-action="Create">Create deal</a>*@
 </div>
 <hr />
-<div class="row">
-    @foreach (var deal in Model.Deals)
-    {
-    <ul>
-        <div class="col-md-4 media">
-            @*<img src="@category.ImageUrl" width="100" class="mr-3" alt="@category.Title">*@
-            <div class="media-body">
-                <h3 class="mt-0">
-                    <a href="@deal.Url">
-                        @deal.Name
-                    </a>
+<div class="align-content-center">
+    <body class="align-content-center">
+        <div class="text-left">
+            <table width="400" cellpadding="10" cellspacing="30" class="align-content-center">
+                <thead>
+                    <tr>
+                        <th>Deal name</th>
+                        <th>Account name</th>
+                        <th>Deal owner</th>
+                    </tr>
+                </thead>
 
-                </h3>
-                <dl>
-                    <dt>Account</dt>
-                    <dd>@deal.AccountAccountName</dd>
-                    <dt>Owner of the deal</dt>
-                    <dd>@deal.UserUserName</dd>
-                    <dt>Created</dt>
-                    <dd><time datetime="@deal.CreatedOn.ToString("O")"></time></dd>
+                @foreach (var deal in Model.Deals)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h3 class="mt-0">
+                                    <a href="@deal.Url">
+                                        @deal.Name
+                                    </a>
+                                </h3>
+                            </td>
+                            <td></td>
+                            <td>
+                                @deal.AccountAccountName
+                            </td>
+                            <td>
+                                @deal.UserUserName
+                            </td>
+                        </tr>
+                    </tbody>
+                }
 
-                </dl>
-            </div>
+            </table>
+
+            <footer id="footer"></footer>
+
         </div>
-        <div></div>
-    </ul>
-    }
+    </body>
 </div>
+
 
 
