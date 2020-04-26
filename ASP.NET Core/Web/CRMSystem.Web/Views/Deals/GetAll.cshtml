@@ -1,7 +1,9 @@
 ﻿@using CRMSystem.Common
+@using System.Linq
 @model CRMSystem.Web.ViewModels.Deals.AllDealsViewModel
 @{
     this.ViewData["Title"] = $"All deals";
+    var totalAmount = 0;
 }
 
 <div class="text-center">
@@ -22,11 +24,15 @@
                         <th>Deal name</th>
                         <th>Account name</th>
                         <th>Deal owner</th>
+                        <th>Amount</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var deal in Model.Deals)
                     {
+                       
+                            
+                        
 
                         <tr>
                             <td>
@@ -39,15 +45,19 @@
                             <td>
                                 @Html.DisplayFor(Model => deal.AccountAccountName)
                             </td>
-                            <td>                                
+                            <td>
                                 @Html.DisplayFor(Model => deal.UserUserName)
+                            </td>
+                            <td>
+                                
+                                @deal.Orders.Sum(o => o.Price) BGN
                             </td>
                         </tr>
 
                     }
                 </tbody>
 
-                </table>
+            </table>
 
             <footer id="footer"></footer>
 
