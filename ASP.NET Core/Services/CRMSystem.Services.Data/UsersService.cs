@@ -37,11 +37,11 @@
             return users.To<T>().ToList();
         }
 
-        public T GetById<T>(string username, string password)
+        public T GetById<T>(string username)
         {
             var user = this.usersRepository
                 .All()
-                .Where(x => x.UserName == username && x.PasswordHash == password)
+                .Where(x => x.UserName == username)
                 .To<T>()
                 .FirstOrDefault();
             return user;

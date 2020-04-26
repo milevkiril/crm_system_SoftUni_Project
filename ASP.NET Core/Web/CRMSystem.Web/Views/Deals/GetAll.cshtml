@@ -16,7 +16,7 @@
 <div class="align-content-center">
     <body class="align-content-center">
         <div class="text-left">
-            <table width="400" cellpadding="10" cellspacing="30" class="align-content-center">
+            <table width="400" cellpadding="10" cellspacing="30" class="table">
                 <thead>
                     <tr>
                         <th>Deal name</th>
@@ -24,30 +24,30 @@
                         <th>Deal owner</th>
                     </tr>
                 </thead>
+                <tbody>
+                    @foreach (var deal in Model.Deals)
+                    {
 
-                @foreach (var deal in Model.Deals)
-                {
-                    <tbody>
                         <tr>
                             <td>
                                 <h3 class="mt-0">
                                     <a href="@deal.Url">
-                                        @deal.Name
+                                        @Html.DisplayFor(Model => deal.Name)
                                     </a>
                                 </h3>
                             </td>
-                            <td></td>
                             <td>
-                                @deal.AccountAccountName
+                                @Html.DisplayFor(Model => deal.AccountAccountName)
                             </td>
-                            <td>
-                                @deal.UserUserName
+                            <td>                                
+                                @Html.DisplayFor(Model => deal.UserUserName)
                             </td>
                         </tr>
-                    </tbody>
-                }
 
-            </table>
+                    }
+                </tbody>
+
+                </table>
 
             <footer id="footer"></footer>
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CRMSystem.Data;
 using CRMSystem.Data.Models;
+using System.Security.Claims;
 
 namespace CRMSystem.Web.Areas.Administration.Controllers
 {
@@ -30,6 +31,11 @@ namespace CRMSystem.Web.Areas.Administration.Controllers
         // GET: Administration/Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (this.User.FindFirstValue(ClaimTypes.NameIdentifier) == null)
+            {
+                return this.RedirectToAction("Login", "Account", new { Area = "Identity" });
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -49,8 +55,13 @@ namespace CRMSystem.Web.Areas.Administration.Controllers
         // GET: Administration/Products/Create
         public IActionResult Create()
         {
+            if (this.User.FindFirstValue(ClaimTypes.NameIdentifier) == null)
+            {
+                return this.RedirectToAction("Login", "Account", new { Area = "Identity" });
+            }
+
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
-            ViewData["FirstName"] = new SelectList(_context.Users, "Id", "FirstName");
+            ViewData["UserName"] = new SelectList(_context.Users, "Id", "UserName");
             return View();
         }
 
@@ -68,13 +79,17 @@ namespace CRMSystem.Web.Areas.Administration.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", product.UserId);
-            ViewData["FirstName"] = new SelectList(_context.Users, "Id", "FirstName", product.UserId);
+            ViewData["UserName"] = new SelectList(_context.Users, "Id", "UserName", product.UserId);
             return View(product);
         }
 
         // GET: Administration/Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (this.User.FindFirstValue(ClaimTypes.NameIdentifier) == null)
+            {
+                return this.RedirectToAction("Login", "Account", new { Area = "Identity" });
+            }
             if (id == null)
             {
                 return NotFound();
@@ -85,7 +100,8 @@ namespace CRMSystem.Web.Areas.Administration.Controllers
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "FirstName", product.UserId);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", product.UserId);
+            ViewData["UserName"] = new SelectList(_context.Users, "Id", "UserName", product.UserId);
             return View(product);
         }
 
@@ -128,6 +144,10 @@ namespace CRMSystem.Web.Areas.Administration.Controllers
         // GET: Administration/Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (this.User.FindFirstValue(ClaimTypes.NameIdentifier) == null)
+            {
+                return this.RedirectToAction("Login", "Account", new { Area = "Identity" });
+            }
             if (id == null)
             {
                 return NotFound();

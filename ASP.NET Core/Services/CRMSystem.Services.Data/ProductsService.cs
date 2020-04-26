@@ -4,6 +4,7 @@
     using CRMSystem.Data.Models;
     using CRMSystem.Services.Mapping;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -56,5 +57,11 @@
                 .To<T>().FirstOrDefault();
             return product;
         }
+
+        public async Task<decimal> GetProductPriceByIdAsync(int id)
+        => await this.productRepository.All().Where(x => x.Id == id)
+            .Select(x => decimal.Parse(x.Price))
+            .FirstOrDefaultAsync();
+
     }
 }

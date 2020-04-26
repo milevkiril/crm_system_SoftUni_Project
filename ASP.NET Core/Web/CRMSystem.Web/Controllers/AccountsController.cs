@@ -71,8 +71,14 @@ namespace CRMSystem.Web.Controllers
         //    return this.View(viewModel);
         //}
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+
+            if (this.User.FindFirstValue(ClaimTypes.NameIdentifier) == null)
+            {
+                return this.RedirectToAction("Login", "Account", new { Area = "Identity" });
+            }
+
             return this.View();
         }
 
@@ -99,6 +105,11 @@ namespace CRMSystem.Web.Controllers
         
         public IActionResult GetAll()
         {
+            if (this.User.FindFirstValue(ClaimTypes.NameIdentifier) == null)
+            {
+                return this.RedirectToAction("Login", "Account", new { Area = "Identity" });
+            }
+
             var viewModel = new AllAccountsViewModel
             {
                 Accounts = this.accountsService.GetAll<AccountViewModel>(),

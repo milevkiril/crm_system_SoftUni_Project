@@ -20,13 +20,14 @@
             this.usersService = usersService;
         }
 
-        [HttpPost]
-        public IActionResult ById(string username, string password)
+        
+        public IActionResult ByName(string username)
         {
-            var getUserViewModel = this.usersService.GetById<UserViewModel>(username, password);
+            var getUserViewModel = this.usersService.GetById<UserViewModel>(username);
             if (getUserViewModel == null)
             {
-                return this.NotFound();
+                this.TempData["InfoMessage"] = "User not found!";
+                return this.Redirect("/Users/GetAll");
             }
 
             return this.View(getUserViewModel);

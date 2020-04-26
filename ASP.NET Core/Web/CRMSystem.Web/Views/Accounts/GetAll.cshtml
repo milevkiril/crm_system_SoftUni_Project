@@ -19,24 +19,46 @@
     </div>
 <hr />
 <div class="row">
-    @foreach (var account in Model.Accounts)
-    {
-       
-        <div class="col-md-4 media">
-            @*<img src="@category.ImageUrl" width="100" class="mr-3" alt="@category.Title">*@
-            <div class="media-body">
-                <h5 class="mt-0">
-                    <a href="@account.Url">
-                        @account.AccountName 
-                    </a>
+    <body class="align-content-center">
+        <div class="text-left">
+            <table width="400" cellpadding="10" cellspacing="30" class="table">
+                <thead>
+                    <tr>
+                        <th>Account name</th>
+                        <th>Account owner</th>
+                        <th>Created time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var account in Model.Accounts)
+                    {
 
-                </h5>
-                @account.UserUserName
-            <time datetime="@account.CreatedOn.ToString("O")"></time>
-            </div>
+                        <tr>
+                            <td>
+                                <h3 class="mt-0">
+                                    <a href="@account.Url">
+                                        @Html.DisplayFor(Model => account.AccountName)
+                                    </a>
+                                </h3>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(Model => account.UserUserName)
+                            </td>
+                            <td>
+                                <time datetime="@account.CreatedOn.ToString("O")"></time>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+
+            </table>
+
+            <footer id="footer"></footer>
+
         </div>
-        <div></div>
-    }
+    </body>
+    
 </div>
 
 

@@ -4,7 +4,7 @@ namespace CRMSystem.Services
 {
     public interface IUsersService
     {
-        T GetById<T>(string username, string password);
+        T GetById<T>(string username);
 
         void ChangePassword(string username, string newPassword);
 

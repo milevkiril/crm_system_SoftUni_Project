@@ -10,5 +10,7 @@
         IEnumerable<T> GetAll<T>();
 
         T GetById<T>(int id);
+
+        Task<decimal> GetProductPriceByIdAsync(int id);
     }
 }

@@ -1,6 +1,7 @@
-﻿@model CRMSystem.Web.ViewModels.Products.ProductViewModel
+﻿@using System.Security.Claims;
+
+@model CRMSystem.Web.ViewModels.Users.UserViewModel
 @{
-    this.ViewData["Title"] = Model.Name;
     
 }
 
@@ -11,7 +12,7 @@
     </div>
 }
 
-<h1>@Model.Name</h1>
+<h1>@Model.UserName</h1>
 <div class="container-fluid mt-100">
     <div class="row">
         <div class="col-md-12">
@@ -20,26 +21,40 @@
                     <div class="media flex-wrap w-100 align-items-center">
                         @*<img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg" class="d-block ui-w-40 rounded-circle" alt="">*@
                         <div class="media-body ml-3">
-                            Created by: @Model.UserUserName
+                            Username: @Model.UserName
 
                             <div class="text-muted small">
-                                Created on:<time datetime="@Model.CreatedOn.ToString("O")"></time>
+                                <time datetime="@Model.CreatedOn.ToString("O")"></time>
                             </div>
                             <div class="text-muted small">
-                                Price:@Model.Price
+                                First Name: @Model.FirstName
                             </div>
                             <div class="text-muted small">
-                                Description:@Model.Description
+                                Last Name: @Model.LastName
                             </div>
+                            @if (Model.City != null && Model.Country != null)
+                            {
+                                <div class="text-muted small">
+                                    City: @Model.City
+                                </div>
+                                <div class="text-muted small">
+                                    Country: @Model.Country
+                                </div>
+                            }
 
                         </div>
                     </div>
+                </div>
+                
+                <div class="card-body">
+
+                    
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 
 

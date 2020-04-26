@@ -63,7 +63,7 @@
             var dealViewModel = this.dealsService.GetById<DealViewModel>(id);
             if (dealViewModel == null)
             {
-                this.TempData["InfoMessage"] = "Deal not founded!";
+                this.TempData["InfoMessage"] = "Deal not found!";
                 return this.Redirect("/Deals/GetAll");
             }
 
@@ -92,7 +92,7 @@
 
             if (id == null || deal == null)
             {
-                this.TempData["InfoMessage"] = "Deal not founded!";
+                this.TempData["InfoMessage"] = "Deal not found!";
                 return this.Redirect("/Deals/GetAll");
             }
 
@@ -163,7 +163,7 @@
 
             if (deal == null)
             {
-                this.TempData["InfoMessage"] = "Deal not founded!";
+                this.TempData["InfoMessage"] = "Deal not found!";
                 return this.Redirect("/Deals/GetAll");
             }
 
@@ -194,7 +194,7 @@
 
             if (deal == null)
             {
-                this.TempData["InfoMessage"] = "Deal not founded!";
+                this.TempData["InfoMessage"] = "Deal not found!";
                 return this.Redirect("/Deals/GetAll");
             }
 

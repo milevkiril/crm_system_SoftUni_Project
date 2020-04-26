@@ -1,10 +1,11 @@
-﻿using CRMSystem.Data.Common.Models;
-using System.ComponentModel.DataAnnotations;
-
-namespace CRMSystem.Data.Models
+﻿namespace CRMSystem.Data.Models
 {
+    using CRMSystem.Data.Common.Models;
+    using System.ComponentModel.DataAnnotations;
+
     public class Order : BaseDeletableModel<int>
     {
+
         [Required]
         public int DealId { get; set; }
 
@@ -18,13 +19,7 @@ namespace CRMSystem.Data.Models
         [Required]
         public int Quantity { get; set; }
 
-        public decimal Price
-        { 
-            get
-            {
-                decimal price = decimal.Parse(this.Product.Price);
-                return price * this.Quantity;
-            }
-        }
+        public decimal Price { get; set; }
+
     }
 }
