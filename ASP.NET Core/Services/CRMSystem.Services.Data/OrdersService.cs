@@ -3,6 +3,7 @@
     using CRMSystem.Data.Common.Repositories;
     using CRMSystem.Data.Models;
     using CRMSystem.Services.Mapping;
+    using System.Linq;
     using System.Threading.Tasks;
 
     public class OrdersService : IOrdersService
@@ -35,6 +36,13 @@
             await this.orderRepository.SaveChangesAsync();
 
             return order.Id;
+        }
+
+        public T GetById<T>(int id)
+        {
+            var order = this.orderRepository.All().Where(x => x.Id == id)
+                .To<T>().FirstOrDefault();
+            return order;
         }
     }
 }

@@ -15,6 +15,8 @@
 
         public string Description { get; set; }
 
+        public decimal TotalAmount { get; set; }
+
         public Stage Stage { get; set; }
 
         [Required]

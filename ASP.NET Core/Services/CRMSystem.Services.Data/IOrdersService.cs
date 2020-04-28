@@ -6,5 +6,7 @@ namespace CRMSystem.Services.Data
     {
         //Task<int> CreateAsync(int dealId, int productId, int quantity);
         Task<int> CreateAsync<T>(T model);
+
+        T GetById<T>(int id);
     }
 }

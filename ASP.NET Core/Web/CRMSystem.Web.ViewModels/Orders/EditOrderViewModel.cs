@@ -6,10 +6,11 @@
     using CRMSystem.Web.ViewModels.Products;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
 
-    public class CreateOrderViewModel : IMapTo<Order>, IHaveCustomMappings
+
+    public class EditOrderViewModel : IMapTo<Order>, IHaveCustomMappings
     {
+        public int Id { get; set; }
 
         [Required]
         public int DealId { get; set; }
@@ -28,7 +29,7 @@
 
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<CreateOrderViewModel, Order>()
+            configuration.CreateMap<EditOrderViewModel, Order>()
                 .ForMember(x => x.Price, s => s.MapFrom(x => x.ProductPrice * x.Quantity));
         }
     }

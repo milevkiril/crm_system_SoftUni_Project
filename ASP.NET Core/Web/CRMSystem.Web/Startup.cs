@@ -124,6 +124,7 @@
                         endpoints.MapControllerRoute("infoDeal", "Deals/{id:int}", new { controller = "Deals", action = "ById" });
                         endpoints.MapControllerRoute("infoProduct", "AllProducts/{id:int}", new { controller = "AllProducts", action = "ById" });
                         endpoints.MapControllerRoute("infoUser", "Users/{username:minlength(3)}", new { controller = "Users", action = "ByName" });
+                        endpoints.MapControllerRoute("infoOrder", "Orders/{id:int}", new { controller = "Orders", action = "ById" });
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         //endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();

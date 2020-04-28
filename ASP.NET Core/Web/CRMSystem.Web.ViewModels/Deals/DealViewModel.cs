@@ -28,5 +28,7 @@
         public IEnumerable<OrderDealViewModel> Orders { get; set; }
 
         public string Url => $"/Deals/{this.Id}";
+
+        public decimal TotalAmount { get; set; }
     }
 }

@@ -2,7 +2,10 @@
 {
     using CRMSystem.Data.Models;
     using CRMSystem.Services.Mapping;
+    using CRMSystem.Web.ViewModels.Deals;
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
 
     public class UserViewModel : IMapFrom<ApplicationUser>
     {
@@ -17,5 +20,7 @@
         public string Country { get; set; }
 
         public string UserName { get; set; }
+
+        public IEnumerable<DealViewModel> MyProperty { get; set; }
     }
 }
