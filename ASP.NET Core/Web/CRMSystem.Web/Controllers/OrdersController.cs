@@ -131,9 +131,10 @@ namespace CRMSystem.Web.Controllers
             //    .All()
             //    .FirstOrDefault(o => o.Id == input.ProductId);
 
-            var price = await this.productService.GetProductPriceByIdAsync(order.ProductId);
+            
 
             order.ProductId = input.ProductId;
+            var price = await this.productService.GetProductPriceByIdAsync(order.ProductId);
             order.Quantity = input.Quantity;
             order.Price = price * input.Quantity;
 

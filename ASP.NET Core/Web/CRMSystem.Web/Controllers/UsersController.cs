@@ -5,11 +5,13 @@
     using CRMSystem.Services;
     using CRMSystem.Web.ViewModels;
     using CRMSystem.Web.ViewModels.Users;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using System.Threading.Tasks;
+
 
     public class UsersController : Controller
     {
@@ -20,7 +22,7 @@
             this.usersService = usersService;
         }
 
-        
+        [Authorize]
         public IActionResult ByName(string username)
         {
             var getUserViewModel = this.usersService.GetById<UserViewModel>(username);

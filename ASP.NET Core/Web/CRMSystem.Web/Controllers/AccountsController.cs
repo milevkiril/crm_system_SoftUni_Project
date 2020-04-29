@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 
 namespace CRMSystem.Web.Controllers
 {
+    [Authorize]
     public class AccountsController : Controller
     {
         private readonly IAccountsService accountsService;

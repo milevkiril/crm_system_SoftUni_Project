@@ -16,6 +16,8 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
 
+
+    [Authorize]
     public class DealsController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;

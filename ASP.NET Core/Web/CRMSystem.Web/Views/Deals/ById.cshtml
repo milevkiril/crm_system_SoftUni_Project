@@ -32,22 +32,9 @@
                                         @order.Price BGN
                                     </div>
 
-                                    @Html.ActionLink("Edit", "ById", "Orders", new { id = order.Id})
-
-                                    @*<div class="text-muted small ml-3">
-                                        @if (this.User.Identity.IsAuthenticated)
-                                        {
-                                            <div class="px-4 pt-3">
-                                                <button type="button" class="btn btn-secondary" onclick="Edit(@order.Id)"><i class="fa fa-plus"></i>&nbsp; Edit</button>
-                                            </div>
-                                        }
-                                    </div>*@
-
+                                    @Html.ActionLink("Details", "ById", "Orders", new { id = order.Id})
                                 </div>
                             </div>
-
-
-
                             <div class="card-body">
                             </div>
                         </div>
@@ -88,23 +75,8 @@
                             <div class="text-muted small">
                                 Amount: @Model.Orders.Sum(o => o.Price) BGN
                             </div>
-
-
                         </div>
-                        @*<div class="text-muted small ml-3">
-                                <form id="votesForm" method="post"></form>
-                                <div>
-                                    <a href="#" onclick="sendVote(@Model.Id, true)">
-                                        <i class="fa fa-thumbs-up"></i>
-                                    </a>
-                                </div>
-                                <div id="votesCount">@Model.VotesCount</div>
-                                <div>
-                                    <a href="#" onclick="sendVote(@Model.Id, false)">
-                                        <i class="fa fa-thumbs-down"></i>
-                                    </a>
-                                </div>
-                            </div>*@
+                        
                     </div>
                 </div>
                 <td>
@@ -149,35 +121,7 @@
     </form>
 </div>
 
-@section Scripts {
-    <script>
-        
-        function showEditOrderForm(ordertId) {
-            $("#EditOrderForm input[name='OrderId']").val(ordertId);
-            $("#EditOrderForm").show();
-            $([document.documentElement, document.body]).animate({
-                scrollTop: $("#EditOrderForm").offset().top
-            }, 1000);
 
-            var url = '@Url.Action("Edit", "Orders")';
-        }
-
-        function sendVote(postId, isUpVote) {
-            var token = $("#votesForm input[name=__RequestVerificationToken]").val();
-            var json = { postId: postId, isUpVote: isUpVote };
-            $.ajax({
-                url: "/api/votes",
-                type: "POST",
-                data: JSON.stringify(json),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                headers: { 'X-CSRF-TOKEN': token },
-                success: function (data) {
-                    $("#votesCount").html(data.votesCount);
-                }
-            });
-        }</script>
-}
 
 
 
