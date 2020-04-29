@@ -42,6 +42,49 @@
                                 </div>
                             }
 
+                            <div></div>
+
+                            <table width="400" cellpadding="10" cellspacing="30" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Deal name</th>
+                                        <th>Account name</th>
+                                        <th>Deal owner</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var deal in Model.Deals)
+                                    {
+
+
+
+
+                                        <tr>
+                                            <td>
+                                                <h3 class="mt-0">
+                                                    <a href="@deal.Url">
+                                                        @Html.DisplayFor(Model => deal.Name)
+                                                    </a>
+                                                </h3>
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(Model => deal.AccountAccountName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(Model => deal.UserUserName)
+                                            </td>
+                                            <td>
+
+                                                @deal.Orders.Sum(o => o.Price) BGN
+                                            </td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                                </table>
+
                         </div>
                     </div>
                 </div>

@@ -108,7 +108,7 @@ namespace CRMSystem.Web.Controllers
             {
                 Price = order.Price,
                 DealId = order.DealId,
-                ProductId = order.DealId,
+                ProductId = order.ProductId,
                 Quantity = order.Quantity,
                 Products = products,
                 ProductPrice = await this.productService.GetProductPriceByIdAsync(order.ProductId),

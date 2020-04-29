@@ -21,6 +21,8 @@
 
         public string UserName { get; set; }
 
+        public IEnumerable<DealViewModel> Deals { get; set; }
+
         public IEnumerable<DealViewModel> MyProperty { get; set; }
     }
 }
