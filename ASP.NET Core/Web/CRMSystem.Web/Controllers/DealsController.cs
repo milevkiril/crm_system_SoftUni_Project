@@ -72,11 +72,11 @@
             return this.View(dealViewModel);
         }
 
-        public IActionResult GetAll()
+        public IActionResult GetAll(string searchBy, string search)
         {
             var viewModel = new AllDealsViewModel
             {
-                Deals = this.dealsService.GetAll<DealViewModel>(),
+                Deals = this.dealsService.GetAll<DealViewModel>(searchBy, search),
             };
             if (viewModel == null)
             {

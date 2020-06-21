@@ -15,6 +15,16 @@
     @*<a asp-controller="Deals" asp-action="Create">Create deal</a>*@
 </div>
 <hr />
+
+<p>
+    @using (Html.BeginForm("GetAll", "Deals", FormMethod.Get))
+    {
+        <b>Search By:</b> @Html.RadioButton("searchBy", "Name", true) <text>Name</text>
+        @Html.RadioButton("searchBy", "UserName") <text>Username</text><br />
+@Html.TextBox("search") <input type="submit" value="Search" />
+}
+</p>
+
 <div class="align-content-center">
     <body class="align-content-center">
         <div class="text-left">

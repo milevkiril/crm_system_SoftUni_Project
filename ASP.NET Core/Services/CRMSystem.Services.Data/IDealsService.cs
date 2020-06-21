@@ -8,7 +8,7 @@
     {
         Task<int> CreateAsync(string dealName, string userId, string description, Stage stage, int accountId);
 
-        IEnumerable<T> GetAll<T>();
+        IEnumerable<T> GetAll<T>(string searchBy, string search);
 
         T GetById<T>(int id);
     }

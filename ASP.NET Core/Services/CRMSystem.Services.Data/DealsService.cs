@@ -46,12 +46,24 @@
         }
 
 
-        public IEnumerable<T> GetAll<T>()
+        public IEnumerable<T> GetAll<T>(string searchBy, string search)
         {
-            var query = this.dealRepository.All()
+            if (searchBy == "Username")
+            {
+                var deals = this.dealRepository.All()
+                .Where(d => d.User.UserName.StartsWith(search) || search == null)
                 .OrderByDescending(x => x.CreatedOn);
 
-            return query.To<T>().ToList();
+                return deals.To<T>().ToList();
+            }
+            else
+            {
+                var deals = this.dealRepository.All()
+                .Where(d => d.Name.StartsWith(search) || search == null)
+                .OrderByDescending(x => x.CreatedOn);
+
+                return deals.To<T>().ToList();
+            }
         }
 
         public T GetById<T>(int id)
