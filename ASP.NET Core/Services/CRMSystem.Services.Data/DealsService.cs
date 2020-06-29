@@ -48,7 +48,7 @@
 
         public IEnumerable<T> GetAll<T>(string searchBy, string search)
         {
-            if (searchBy == "Username")
+            if (searchBy == "UserName")
             {
                 var deals = this.dealRepository.All()
                 .Where(d => d.User.UserName.StartsWith(search) || search == null)

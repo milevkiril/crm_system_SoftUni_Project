@@ -20,7 +20,7 @@
     @using (Html.BeginForm("GetAll", "Deals", FormMethod.Get))
     {
         <b>Search By:</b> @Html.RadioButton("searchBy", "Name", true) <text>Name</text>
-        @Html.RadioButton("searchBy", "UserName") <text>Username</text><br />
+        @Html.RadioButton("searchBy", "UserName") <text>UserName</text><br />
 @Html.TextBox("search") <input type="submit" value="Search" />
 }
 </p>
