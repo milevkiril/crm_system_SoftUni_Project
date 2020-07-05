@@ -2,6 +2,7 @@
 {
     using CRMSystem.Common;
     using CRMSystem.Data;
+    using CRMSystem.Data.Common.Repositories;
     using CRMSystem.Data.Models;
     using CRMSystem.Data.Models.Enumerators;
     using CRMSystem.Services.Data;
@@ -23,15 +24,18 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IDealsService dealsService;
         private readonly ApplicationDbContext context;
+        private readonly IDeletableEntityRepository<Deal> dealRepository;
 
         public DealsController(
             UserManager<ApplicationUser> userManager,
             IDealsService dealsService,
-            ApplicationDbContext context)
+            ApplicationDbContext context,
+            IDeletableEntityRepository<Deal> dealRepository)
         {
             this.userManager = userManager;
             this.dealsService = dealsService;
             this.context = context;
+            this.dealRepository = dealRepository;
         }
 
         public IActionResult Create()
@@ -90,7 +94,9 @@
         [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
-            var deal = await context.Deals.FindAsync(id);
+            var deal = dealRepository.All().Where(d => d.Id == id).FirstOrDefault();//await context.Deals
+                                                                                    //.Include(d => d.User)
+                                                                                    //FirstOrDefaultAsync(m => m.Id == id);
 
             if (id == null || deal == null)
             {
@@ -128,8 +134,8 @@
             {
                 try
                 {
-                    context.Update(deal);
-                    await context.SaveChangesAsync();
+                    dealRepository.Update(deal);//context.Update(deal);
+                    await dealRepository.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -159,9 +165,9 @@
                 return NotFound();
             }
 
-            var deal = await context.Deals
-                .Include(d => d.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var deal = dealRepository.All().Where(d => d.Id == id).FirstOrDefault();//await context.Deals
+                                                                                    //.Include(d => d.User)
+                                                                                    //FirstOrDefaultAsync(m => m.Id == id);
 
             if (deal == null)
             {
@@ -190,9 +196,9 @@
                 return NotFound();
             }
 
-            var deal = await context.Deals
-                .Include(d => d.User)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var deal = dealRepository.All().Where(d => d.Id == id).FirstOrDefault();//await context.Deals
+                                                                                    //.Include(d => d.User)
+                                                                                    //FirstOrDefaultAsync(m => m.Id == id);
 
             if (deal == null)
             {
@@ -219,7 +225,7 @@
         [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var deal = await context.Deals.FindAsync(id);
+            var deal = dealRepository.All().Where(d => d.Id == id).FirstOrDefault();//context.Deals.FindAsync(id);
             context.Deals.Remove(deal);
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -227,7 +233,7 @@
 
         private bool DealExists(int id)
         {
-            return context.Deals.Any(e => e.Id == id);
+            return dealRepository.All().Any(e => e.Id == id);//Where(e => e.Id == id);
         }
     }
 }
